@@ -96,6 +96,8 @@ map(
   "<cmd>Telescope find_files follow=true no_ignore=true hidden=true<CR>",
   { desc = "Telescope Find all files" }
 )
+map("n", "<leader>h", "<cmd>Telescope help_tags<cr>", { desc = "Telescope Help Pages" })
+map("n", "<leader>u", "<cmd>Telescope undo<cr>", { desc = "Telescope Undo" })
 
 -- blankline
 map("n", "<leader>cc", function()
@@ -157,7 +159,7 @@ map("n", "guiw", "mzguiw`z")
 
 -- Smart enter insert...
 map("n", "i", function()
-  if vim.fn.getline('.') == '' then
+  if vim.fn.getline('.'):match("^%s*$") then
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('"_cc', true, false, true), 'n', false)
   else
     vim.api.nvim_feedkeys('i', 'n', false)
@@ -166,4 +168,6 @@ end)
 
 map("n", "<M-z>", "<cmd>set wrap!<cr>")
 
-
+-- Temp
+map("n", ",,", "A,<Esc>")
+map("n", ";;", "A;<Esc>")

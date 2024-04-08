@@ -12,11 +12,12 @@ return {
         return vim.fn.executable 'make' == 1
       end,
     },
-    { 'nvim-telescope/telescope-ui-select.nvim' },
-    { 'nvim-tree/nvim-web-devicons' },
+    'nvim-telescope/telescope-ui-select.nvim',
+    'nvim-tree/nvim-web-devicons',
+    'debugloop/telescope-undo.nvim'
   },
-  config = function(_, opts)
-    require('telescope').setup({
+  opts = function()
+    return {
       defaults = {
         vimgrep_arguments = {
           'rg',
@@ -56,30 +57,35 @@ return {
         border = {},
         borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
         color_devicons = true,
-        set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
+        set_env = { ['COLORTERM'] = 'truecolor' },
         file_previewer = require('telescope.previewers').vim_buffer_cat.new,
         grep_previewer = require('telescope.previewers').vim_buffer_vimgrep.new,
         qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
-        -- Developer configurations: Not meant for general override
         buffer_previewer_maker = require('telescope.previewers').buffer_previewer_maker,
         mappings = {
           n = { ['q'] = require('telescope.actions').close },
         },
-        extensions = {
-          fzf = {
-            fuzzy = true,
-            override_generic_sorter = true,
-            override_file_sorter = true,
-            case_mode = 'smart_case',
-          },
-          ['ui-select'] = {
-            require('telescope.themes').get_dropdown(),
-          },
+      },
+      extensions = {
+        fzf = {
+          fuzzy = true,
+          override_generic_sorter = true,
+          override_file_sorter = true,
+          case_mode = 'smart_case',
+        },
+        ['ui-select'] = {
+          require('telescope.themes').get_dropdown({ layout_config = { width = .5 } }),
+        },
+        undo = {
         }
       }
-    })
+    }
+  end,
+  config = function(_, opts)
+    require('telescope').setup(opts)
 
-    pcall(require('telescope').load_extension, 'fzf')
-    pcall(require('telescope').load_extension, 'ui-select')
+    require('telescope').load_extension('fzf')
+    require('telescope').load_extension('ui-select')
+    require('telescope').load_extension('undo')
   end
 }
