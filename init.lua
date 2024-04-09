@@ -20,12 +20,12 @@ local lazyconfig = {
       lazy = '󰂠 ',
       loaded = '',
       not_loaded = '',
-    }
-  }
+    },
+  },
 }
 
 require('lazy').setup({
-  { import = 'plugins' }
+  { import = 'plugins' },
 }, lazyconfig)
 
 require 'autocmds'
