@@ -3,7 +3,7 @@ local o = vim.o
 local g = vim.g
 
 o.timeoutlen = 500
-o.updatetime = 250
+o.updatetime = 1000
 o.clipboard = 'unnamedplus'
 o.termguicolors = true
 vim.opt.undofile = true

@@ -14,7 +14,8 @@ return {
     },
     'nvim-telescope/telescope-ui-select.nvim',
     'nvim-tree/nvim-web-devicons',
-    'debugloop/telescope-undo.nvim'
+    'benfowler/telescope-luasnip.nvim',
+    'debugloop/telescope-undo.nvim',
   },
   opts = function()
     return {
@@ -74,18 +75,18 @@ return {
           case_mode = 'smart_case',
         },
         ['ui-select'] = {
-          require('telescope.themes').get_dropdown({ layout_config = { width = .5 } }),
+          require('telescope.themes').get_dropdown { layout_config = { width = 0.5 } },
         },
-        undo = {
-        }
-      }
+        undo = {},
+      },
     }
   end,
   config = function(_, opts)
     require('telescope').setup(opts)
 
-    require('telescope').load_extension('fzf')
-    require('telescope').load_extension('ui-select')
-    require('telescope').load_extension('undo')
-  end
+    require('telescope').load_extension 'fzf'
+    require('telescope').load_extension 'ui-select'
+    require('telescope').load_extension 'undo'
+    require('telescope').load_extension 'luasnip'
+  end,
 }

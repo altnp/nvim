@@ -42,12 +42,6 @@ map("n", "<leader>fm", function()
 end, { desc = "Format File" })
 map("n", "<leader>n", "<cmd>enew<CR>", { desc = "New File" })
 
--- global lsp mappings
-map("n", "<leader>lf", vim.diagnostic.open_float, { desc = "Lsp floating diagnostics" })
-map("n", "[d", vim.diagnostic.goto_prev, { desc = "Lsp prev diagnostic" })
-map("n", "]d", vim.diagnostic.goto_next, { desc = "Lsp next diagnostic" })
-map("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Lsp diagnostic loclist" })
-
 -- Buffers
 map("n", "<tab>", function()
   require("nvchad.tabufline").next()
