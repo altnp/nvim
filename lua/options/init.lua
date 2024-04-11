@@ -15,6 +15,9 @@ o.splitright = true
 opt.list = true
 opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
+-- Completion
+vim.opt.pumheight = 6
+
 -- Gutter
 o.signcolumn = 'yes'
 o.relativenumber = true
@@ -52,5 +55,5 @@ g['loaded_python3_provider'] = 0
 g['loaded_perl_provider'] = 0
 g['loaded_ruby_provider'] = 0
 
-local is_windows = vim.fn.has("win32") ~= 0
-vim.env.PATH = vim.fn.stdpath "data" .. "/mason/bin" .. (is_windows and ";" or ":") .. vim.env.PATH
+local is_windows = vim.fn.has 'win32' ~= 0
+vim.env.PATH = vim.fn.stdpath 'data' .. '/mason/bin' .. (is_windows and ';' or ':') .. vim.env.PATH

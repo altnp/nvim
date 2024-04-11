@@ -1,11 +1,57 @@
 -- TODO: enable buffer for only specific cmds
 -- TODO: update icons (https://code.visualstudio.com/docs/editor/intellisense#_types-of-completions)
--- TODO: highlights (https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance#how-to-add-visual-studio-code-dark-theme-colors-to-the-menu)
+-- TODO: highlights (https://github.com/hrsh7th/n-cmp/wiki/Menu-Appearance#how-to-add-visual-studio-code-dark-theme-colors-to-the-menu)
 -- TODO: complteopt preview?
+-- TODO: prioritize & limit # of completions
+
+local function kind_overrides(entry, item)
+  local override = {}
+  local icons = require 'ui.icons'
+
+  if entry.source.name == 'cmdline' then
+    override.icon = icons['Event']
+    override.hl_group = 'CmpItemKindEvent'
+    override.kind = 'Cmd'
+  elseif entry.source.name == 'path' then
+    local icon, hl_group = require('n-web-devicons').get_icon(entry:get_completion_item().label)
+    override.icon = icon
+    override.hl_group = hl_group
+  end
+
+  return override
+end
+
+local formatting_style = {
+  fields = { 'abbr', 'kind', 'menu' },
+  format = function(entry, item)
+    local overrides = kind_overrides(entry, item)
+    local icons = require 'ui.icons'
+    local icon = ' ' .. (overrides.icon or icons[item.kind] or '') .. ' '
+
+    item.kind = string.format('%s %s', icon, overrides.kind or item.kind)
+    item.kind_hl_group = overrides.hl_group or item.kind_hl_group
+    return item
+  end,
+}
+
+local function border(hl_name)
+  return {
+    { '╭', hl_name },
+    { '─', hl_name },
+    { '╮', hl_name },
+    { '│', hl_name },
+    { '╯', hl_name },
+    { '─', hl_name },
+    { '╰', hl_name },
+    { '│', hl_name },
+  }
+end
+
 return {
   {
     'hrsh7th/nvim-cmp',
     event = { 'InsertEnter', 'CmdLineEnter' },
+    enabled = false,
     dependencies = {
       'L3MON4D3/LuaSnip',
       'saadparwaiz1/cmp_luasnip',
@@ -19,30 +65,6 @@ return {
     opts = function()
       local cmp = require 'cmp'
 
-      local formatting_style = {
-        fields = { 'abbr', 'kind', 'menu' },
-        format = function(_, item)
-          local icons = require 'ui.icons'
-          local icon = ' ' .. (icons[item.kind] or '') .. ' '
-
-          item.kind = string.format('%s %s', icon, item.kind)
-          return item
-        end,
-      }
-
-      local function border(hl_name)
-        return {
-          { '╭', hl_name },
-          { '─', hl_name },
-          { '╮', hl_name },
-          { '│', hl_name },
-          { '╯', hl_name },
-          { '─', hl_name },
-          { '╰', hl_name },
-          { '│', hl_name },
-        }
-      end
-
       return {
         completion = {
           completeopt = 'menu,menuone',
@@ -50,13 +72,14 @@ return {
         window = {
           completion = {
             side_padding = 1,
-            winhighlight = 'Normal:CmpPmenu,CursorLine:CmpSel,Search:None',
+            winhighlight = 'Normal:Normal,CursorLine:PmenuSel,Search:None',
             scrollbar = true,
+            maxheight = 5,
             border = border 'LspInfoBorder',
           },
           documentation = {
             border = border 'LspInfoBorder',
-            winhighlight = 'Normal:CmpDoc',
+            winhighlight = 'Normal:Normal',
           },
         },
         formatting = formatting_style,
@@ -65,6 +88,50 @@ return {
             require('luasnip').lsp_expand(args.body)
           end,
         },
+        sources = {
+          { name = 'n_lsp' },
+          { name = 'luasnip' },
+          { name = 'buffer' },
+          { name = 'n_lua' },
+          { name = 'path' },
+        },
+        experimental = {
+          ghost_text = { hl_group = 'DiagnosticUnnecessary' },
+        },
+        mapping = {
+          ['<C-k>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'c', 'i', 's' }),
+          ['<C-j>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'c', 'i', 's' }),
+          ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'c', 'i', 's' }),
+          ['<Esc>'] = cmp.mapping(cmp.mapping.close(), { 'c', 'i', 's' }),
+
+          ['<CR>'] = cmp.mapping(
+            cmp.mapping.confirm {
+              behavior = cmp.ConfirmBehavior.Insert,
+              select = true,
+            },
+            { 'c', 'i', 's' }
+          ),
+
+          ['<Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            elseif require('luasnip').expand_or_jumpable() then
+              vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-expand-or-jump', true, true, true), '')
+            else
+              fallback()
+            end
+          end, { 'c', 'i', 's' }),
+
+          ['<S-Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              cmp.select_prev_item()
+            elseif require('luasnip').jumpable(-1) then
+              vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-jump-prev', true, true, true), '')
+            else
+              fallback()
+            end
+          end, { 'c', 'i', 's' }),
+        },
       }
     end,
     config = function(_, opts)
@@ -72,30 +139,32 @@ return {
 
       cmp.setup(opts)
 
-      cmp.setup.cmdline('/', {
-        sources = {
-          { name = 'buffer' },
-        },
-      })
-
-      cmp.setup.cmdline(':', {
-        sources = cmp.config.sources({
-          { name = 'path' },
-        }, {
-          {
-            name = 'cmdline',
-            option = {
-              ignore_cmds = { 'Man', '!' },
-            },
-            keyword_length = 3,
-          },
-        }, {
-          {
-            name = 'buffer',
-            keyword_length = 3,
-          },
-        }),
-      })
+      -- cmp.setup.cmdline('/', {
+      --   sources = {
+      --     { name = 'buffer' },
+      --   },
+      -- })
+      --
+      -- cmp.setup.cmdline(':', {
+      --   sources = cmp.config.sources({
+      --     { name = 'path' },
+      --   }, {
+      --     {
+      --       name = 'cmdline',
+      --       option = {
+      --         ignore_cmds = { 'Man', '!' },
+      --         keyword_length = 3,
+      --       },
+      --     },
+      --   }, {
+      --     {
+      --       name = 'buffer',
+      --       option = {
+      --         keyword_length = 3,
+      --       },
+      --     },
+      --   }),
+      -- })
     end,
   },
 }
