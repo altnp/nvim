@@ -152,15 +152,11 @@ return {
             name = 'cmdline',
             option = {
               ignore_cmds = { 'Man', '!' },
-              keyword_length = 3,
             },
           },
         }, {
           {
             name = 'buffer',
-            option = {
-              keyword_length = 3,
-            },
           },
         }),
       })
