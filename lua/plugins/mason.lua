@@ -15,6 +15,12 @@ return {
     },
     config = function(_, opts)
       require('mason').setup(opts)
+
+      -- Override :Mason to load telescope for the filter menu, incase telescope has not been loaded yet
+      vim.api.nvim_create_user_command('Mason', function()
+        require 'telescope'
+        require('mason.ui').open()
+      end, {})
     end,
   },
   {
@@ -33,8 +39,8 @@ return {
       return {
         ensure_installed = ensure_installed,
         auto_update = true,
-        start_delay = 1000,
-        debounce_hours = 12,
+        -- start_delay = 1000,
+        -- debounce_hours = 12,
       }
     end,
   },

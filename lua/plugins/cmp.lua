@@ -13,7 +13,7 @@ local function kind_overrides(entry, item)
     override.hl_group = 'CmpItemKindEvent'
     override.kind = 'Cmd'
   elseif entry.source.name == 'path' then
-    local icon, hl_group = require('n-web-devicons').get_icon(entry:get_completion_item().label)
+    local icon, hl_group = require('nvim-web-devicons').get_icon(entry:get_completion_item().label)
     override.icon = icon
     override.hl_group = hl_group
   end
