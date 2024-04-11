@@ -51,7 +51,6 @@ return {
   {
     'hrsh7th/nvim-cmp',
     event = { 'InsertEnter', 'CmdLineEnter' },
-    enabled = false,
     dependencies = {
       'L3MON4D3/LuaSnip',
       'saadparwaiz1/cmp_luasnip',
@@ -139,32 +138,32 @@ return {
 
       cmp.setup(opts)
 
-      -- cmp.setup.cmdline('/', {
-      --   sources = {
-      --     { name = 'buffer' },
-      --   },
-      -- })
-      --
-      -- cmp.setup.cmdline(':', {
-      --   sources = cmp.config.sources({
-      --     { name = 'path' },
-      --   }, {
-      --     {
-      --       name = 'cmdline',
-      --       option = {
-      --         ignore_cmds = { 'Man', '!' },
-      --         keyword_length = 3,
-      --       },
-      --     },
-      --   }, {
-      --     {
-      --       name = 'buffer',
-      --       option = {
-      --         keyword_length = 3,
-      --       },
-      --     },
-      --   }),
-      -- })
+      cmp.setup.cmdline('/', {
+        sources = {
+          { name = 'buffer' },
+        },
+      })
+
+      cmp.setup.cmdline(':', {
+        sources = cmp.config.sources({
+          { name = 'path' },
+        }, {
+          {
+            name = 'cmdline',
+            option = {
+              ignore_cmds = { 'Man', '!' },
+              keyword_length = 3,
+            },
+          },
+        }, {
+          {
+            name = 'buffer',
+            option = {
+              keyword_length = 3,
+            },
+          },
+        }),
+      })
     end,
   },
 }

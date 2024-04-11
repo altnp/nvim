@@ -28,7 +28,7 @@ opt.fillchars = { eob = ' ' }
 -- Find and Replace
 o.ignorecase = true
 o.smartcase = true
-opt.inccommand = 'split'
+opt.inccommand = 'nosplit'
 
 -- Cursor
 o.cursorline = true
