@@ -142,13 +142,13 @@ map('n', 'gUiw', 'mzgUiw`z')
 map('n', 'guiw', 'mzguiw`z')
 
 -- Smart enter insert...
-map('n', 'i', function()
-  if vim.fn.getline('.'):match '^%s*$' then
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('"_cc', true, false, true), 'n', false)
-  else
-    vim.api.nvim_feedkeys('i', 'n', false)
-  end
-end)
+-- map('n', 'i', function()
+--   if vim.fn.getline('.'):match '^%s*$' then
+--     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('"_cc', true, false, true), 'n', false)
+--   else
+--     vim.api.nvim_feedkeys('i', 'n', false)
+--   end
+-- end)
 
 map('n', '<M-z>', '<cmd>set wrap!<cr>')
 
