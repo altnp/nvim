@@ -1,14 +1,13 @@
--- TODO: enable buffer for only specific cmds
--- TODO: update icons (https://code.visualstudio.com/docs/editor/intellisense#_types-of-completions)
--- TODO: highlights (https://github.com/hrsh7th/n-cmp/wiki/Menu-Appearance#how-to-add-visual-studio-code-dark-theme-colors-to-the-menu)
+-- TODO: enable buffer for only specific cmds ('s')
+-- TODO: more highlights (https://github.com/hrsh7th/n-cmp/wiki/Menu-Appearance#how-to-add-visual-studio-code-dark-theme-colors-to-the-menu)
 -- TODO: complteopt preview?
 -- TODO: prioritize & limit # of completions
 
-local function kind_overrides(entry, item)
+local function kind_overrides(entry, _)
   local override = {}
   local icons = require 'ui.icons'
 
-  if entry.source.name == 'cmdline' then
+  if vim.tbl_contains({ 'cmdline', 'cmdline-short' }, entry.source.name) then
     override.icon = icons['Event']
     override.hl_group = 'CmpItemKindEvent'
     override.kind = 'Cmd'
@@ -88,18 +87,22 @@ return {
           end,
         },
         sources = {
-          { name = 'n_lsp' },
+          { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'buffer' },
-          { name = 'n_lua' },
+          { name = 'nvim_lua' },
           { name = 'path' },
         },
         experimental = {
           ghost_text = { hl_group = 'DiagnosticUnnecessary' },
         },
+        matching = {
+          -- disallow_fuzzy_matching = true,
+        },
         mapping = {
           ['<C-k>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'c', 'i', 's' }),
           ['<C-j>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'c', 'i', 's' }),
+          -- ['<M-Space>'] = cmp.mapping(cmp.mapping.complete { config = { matching = { disallow_fuzzy_matching = false } } }, { 'c', 'i', 's' }),
           ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'c', 'i', 's' }),
           ['<Esc>'] = cmp.mapping(cmp.mapping.close(), { 'c', 'i', 's' }),
 
@@ -136,6 +139,21 @@ return {
     config = function(_, opts)
       local cmp = require 'cmp'
 
+      local source = {
+        get_keyword_pattern = function()
+          return [[\k\+]]
+        end,
+        complete = function(_, _, callback)
+          callback {
+            { label = 'w' },
+            { label = 'q' },
+            { label = 'so' },
+            { label = 'Ex' },
+          }
+        end,
+      }
+      cmp.register_source('cmdline-short', source)
+
       cmp.setup(opts)
 
       cmp.setup.cmdline('/', {
@@ -148,6 +166,9 @@ return {
         sources = cmp.config.sources({
           { name = 'path' },
         }, {
+          {
+            name = 'cmdline-short',
+          },
           {
             name = 'cmdline',
             option = {

@@ -6,7 +6,14 @@ o.timeoutlen = 500
 o.updatetime = 1000
 o.clipboard = 'unnamedplus'
 o.termguicolors = true
-vim.opt.undofile = true
+opt.undofile = true
+
+vim.api.nvim_create_autocmd('FileType', {
+  group = vim.api.nvim_create_augroup('Options', { clear = true }),
+  callback = function()
+    opt.formatoptions:remove 'o'
+  end,
+})
 
 -- Windows
 o.scrolloff = 7
@@ -16,7 +23,7 @@ opt.list = true
 opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 -- Completion
-vim.opt.pumheight = 6
+opt.pumheight = 6
 
 -- Gutter
 o.signcolumn = 'yes'
