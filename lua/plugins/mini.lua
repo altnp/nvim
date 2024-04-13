@@ -2,8 +2,8 @@ return {
   {
     'echasnovski/mini.move',
     keys = {
-      -- { "<M-k>", mode = "n", desc = "Move line up" },
-      -- { "<M-j>", mode = "n", desc = "Move line down" },
+      { '<M-k>', mode = 'n', desc = 'Move line up' },
+      { '<M-j>', mode = 'n', desc = 'Move line down' },
       { '<M-k>', mode = 'x', desc = 'Move selection up' },
       { '<M-j>', mode = 'x', desc = 'Move selection down' },
     },

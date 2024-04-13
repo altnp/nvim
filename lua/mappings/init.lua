@@ -4,7 +4,7 @@ local map = vim.keymap.set
 map('c', 'jj', '<Esc>')
 
 -- Buffer Navigation
-map('n', 'H', '^')
+map('n', 'H', '^', { desc = '' })
 map('i', 'jj', '<Esc>')
 map('n', 'L', '$')
 map('n', '<Leader>j', 'J')
@@ -18,7 +18,7 @@ map('o', 'H', '^')
 map('o', 'L', '$')
 map('v', 'J', '10j')
 map('v', 'K', '10k')
-map('i', '<C-h>', '<Left>', { desc = 'Move Left' })
+map('i', '<C-h>', '<Left>', { desc = '' })
 map('i', '<C-l>', '<Right>', { desc = 'Move Right' })
 map('i', '<C-j>', '<Down>', { desc = 'Move Down' })
 map('i', '<C-k>', '<Up>', { desc = 'Move Up' })
@@ -73,7 +73,7 @@ map('n', '<leader>fb', '<cmd>Telescope buffers<CR>', { desc = 'Telescope Find bu
 map('n', '<leader>fz', '<cmd>Telescope current_buffer_fuzzy_find<CR>', { desc = 'Telescope Find in current buffer' })
 map('n', '<leader>ff', '<cmd>Telescope find_files<cr>', { desc = 'Telescope Find files' })
 map('n', '<leader>fa', '<cmd>Telescope find_files follow=true no_ignore=true hidden=true<CR>', { desc = 'Telescope Find all files' })
-map('n', '<leader>?', '<cmd>Telescope help_tags<cr>', { desc = 'Telescope Help Pages' })
+map('n', '??', '<cmd>Telescope help_tags<cr>', { desc = 'Telescope Help Pages' })
 map('n', '<leader>u', '<cmd>Telescope undo<cr>', { desc = 'Telescope Undo' })
 vim.keymap.set('n', '<leader>pws', function()
   local word = vim.fn.expand '<cword>'
@@ -103,7 +103,8 @@ end, { desc = 'Blankline Jump to current context' })
 map('n', '<leader>a', 'GVgg')
 
 -- Undo with U
-map('n', 'U', '<C-r>')
+map('n', 'U', '<C-r>', { silent = true })
+map('n', 'u', 'u', { silent = true })
 
 -- Clipboard mappings
 map('n', 'Y', 'y$')
@@ -123,8 +124,8 @@ map('n', '<C-o>', "o<Esc>'[k")
 map('n', '<C-S-o>', 'O<Esc>j')
 
 -- Save and quit remaps
-map('n', '<C-s>', '<cmd>up<cr>', { silent = true })
-map('n', '<C-S-s>', '<cmd>wa<cr>', { silent = true })
+map('n', '<C-s>', '<cmd>silent up<cr>')
+map('n', '<C-S-s>', '<cmd>silent wa<cr>')
 map('n', '<C-w>', '<cmd>confirm q<cr>')
 map('n', '<C-S-w>', '<cmd>confirm qa<cr>')
 
@@ -153,6 +154,12 @@ end)
 
 map('n', '<M-z>', '<cmd>set wrap!<cr>')
 
+-- Mouse
+map('v', '<RightMouse>', 'y')
+map('n', '<RightMouse>', 'y')
+
 -- Temp
 map('n', ',,', 'A,<Esc>')
 map('n', ';;', 'A;<Esc>')
+map('n', '<leader>j', 'J')
+map('v', '<leader>j', 'J')
