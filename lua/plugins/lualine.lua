@@ -12,7 +12,7 @@ local function show_cwd()
 end
 
 local fmt_filename = function(str, _)
-  for _, v in ipairs { 'NvimTree', ' ' } do
+  for _, v in ipairs { 'NvimTree' } do
     if vim.startswith(str, v) then
       return ''
     end
@@ -29,7 +29,7 @@ return {
       icons_enabled = true,
       theme = 'auto',
       component_separators = { left = '', right = '' },
-      section_separators = { left = '', right = '' },
+      section_separators = { left = '', right = '' },
       disabled_filetypes = {
         statusline = {},
         winbar = {},
@@ -73,8 +73,8 @@ return {
         },
       },
       lualine_x = { show_macro_recording, 'encoding', 'fileformat' },
-      lualine_y = { show_cwd },
-      lualine_z = {},
+      lualine_y = { 'progress' },
+      lualine_z = { show_cwd },
     },
     inactive_sections = {},
     tabline = {},
