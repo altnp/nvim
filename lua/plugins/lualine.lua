@@ -1,14 +1,19 @@
+-- TODO: use highlight instead of hardcoded colors for Macro Recording Status
 local function show_macro_recording()
   local recording_register = vim.fn.reg_recording()
   if recording_register == '' then
     return ''
   else
-    return 'Recording @' .. recording_register
+    return ' @' .. recording_register
   end
 end
 
 local function show_cwd()
   return vim.fn.fnamemodify(vim.fn.getcwd(), ':t') .. ' '
+end
+
+local function show_lsp_progress()
+  return require('lsp-progress').progress()
 end
 
 local fmt_filename = function(str, _)
@@ -25,7 +30,23 @@ return {
   event = 'VeryLazy',
   dependencies = {
     'nvim-tree/nvim-web-devicons',
-    'arkav/lualine-lsp-progress',
+    {
+      'linrongbin16/lsp-progress.nvim',
+      opts = {
+        series_format = function(title, _, percentage, _)
+          local builder = {}
+          local has_title = false
+          if type(title) == 'string' and string.len(title) > 0 then
+            table.insert(builder, title)
+            has_title = true
+          end
+          if percentage and has_title then
+            table.insert(builder, string.format('(%.0f%%)', percentage))
+          end
+          return table.concat(builder, ' ')
+        end,
+      },
+    },
   },
   opts = {
     options = {
@@ -75,7 +96,15 @@ return {
           },
         },
       },
-      lualine_x = { show_macro_recording, 'lsp_progress', 'encoding', 'fileformat' },
+      lualine_x = {
+        {
+          show_macro_recording,
+          color = { fg = '#c74e39' },
+        },
+        show_lsp_progress,
+        'encoding',
+        'fileformat',
+      },
       lualine_y = { 'progress' },
       lualine_z = { show_cwd },
     },
@@ -91,7 +120,9 @@ return {
     local lualine = require 'lualine'
     lualine.setup(opts)
 
+    vim.api.nvim_create_augroup('LualineUpdates', { clear = true })
     vim.api.nvim_create_autocmd('RecordingEnter', {
+      group = 'LualineUpdates',
       callback = function()
         lualine.refresh {
           place = { 'statusline' },
@@ -100,6 +131,7 @@ return {
     })
 
     vim.api.nvim_create_autocmd('RecordingLeave', {
+      group = 'LualineUpdates',
       callback = function()
         local timer = vim.loop.new_timer()
         timer:start(
@@ -110,6 +142,12 @@ return {
           end)
         )
       end,
+    })
+
+    vim.api.nvim_create_autocmd('User', {
+      group = 'LualineUpdates',
+      pattern = 'LspProgressStatusUpdated',
+      callback = require('lualine').refresh,
     })
   end,
 }
