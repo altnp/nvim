@@ -23,7 +23,10 @@ end
 return {
   'nvim-lualine/lualine.nvim',
   event = 'VeryLazy',
-  dependencies = { 'nvim-tree/nvim-web-devicons' },
+  dependencies = {
+    'nvim-tree/nvim-web-devicons',
+    'arkav/lualine-lsp-progress',
+  },
   opts = {
     options = {
       icons_enabled = true,
@@ -72,7 +75,7 @@ return {
           },
         },
       },
-      lualine_x = { show_macro_recording, 'encoding', 'fileformat' },
+      lualine_x = { show_macro_recording, 'lsp_progress', 'encoding', 'fileformat' },
       lualine_y = { 'progress' },
       lualine_z = { show_cwd },
     },
