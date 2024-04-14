@@ -3,7 +3,7 @@ return {
   event = 'User FilePost',
   opts = {
     indent = { char = '│' },
-    scope = { char = '│' },
+    scope = { enabled = false, char = '│' },
   },
   config = function(_, opts)
     local hooks = require 'ibl.hooks'

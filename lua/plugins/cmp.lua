@@ -3,7 +3,7 @@
 -- TODO: complteopt preview?
 -- TODO: prioritize & limit # of completions
 
-local function kind_overrides(entry, _)
+local function kind_overrides(entry, item)
   local override = {}
   local icons = require 'ui.icons'
 
@@ -51,6 +51,7 @@ return {
     'hrsh7th/nvim-cmp',
     event = { 'InsertEnter', 'CmdLineEnter' },
     dependencies = {
+      'abecodes/tabout.nvim',
       'L3MON4D3/LuaSnip',
       'saadparwaiz1/cmp_luasnip',
       'windwp/nvim-autopairs',
@@ -116,7 +117,10 @@ return {
 
           ['<Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
-              cmp.select_next_item()
+              cmp.confirm {
+                behavior = cmp.ConfirmBehavior.Insert,
+                select = true,
+              }
             elseif require('luasnip').expand_or_jumpable() then
               vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-expand-or-jump', true, true, true), '')
             else
@@ -125,9 +129,7 @@ return {
           end, { 'c', 'i', 's' }),
 
           ['<S-Tab>'] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item()
-            elseif require('luasnip').jumpable(-1) then
+            if require('luasnip').jumpable(-1) then
               vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-jump-prev', true, true, true), '')
             else
               fallback()

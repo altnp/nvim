@@ -43,18 +43,6 @@ end, { desc = 'Format File' })
 map('n', '<leader>n', '<cmd>enew<CR>', { desc = 'New File' })
 
 -- Buffers
-map('n', '<tab>', function()
-  require('nvchad.tabufline').next()
-end, { desc = 'Buffer Goto next' })
-
-map('n', '<S-tab>', function()
-  require('nvchad.tabufline').prev()
-end, { desc = 'Buffer Goto prev' })
-
-map('n', '<leader>x', function()
-  require('nvchad.tabufline').close_buffer()
-end, { desc = 'Buffer Close' })
-
 map('n', '<leader><tab>', '<C-^>')
 
 -- Comment
@@ -159,7 +147,5 @@ map('v', '<RightMouse>', 'y')
 map('n', '<RightMouse>', 'y')
 
 -- Temp
-map('n', ',,', 'A,<Esc>')
-map('n', ';;', 'A;<Esc>')
 map('n', '<leader>j', 'J')
 map('v', '<leader>j', 'J')

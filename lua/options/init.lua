@@ -1,3 +1,6 @@
+local autocmd = vim.api.nvim_create_autocmd
+local opts_group = vim.api.nvim_create_augroup('Options', { clear = true })
+
 local opt = vim.opt
 local o = vim.o
 local g = vim.g
@@ -8,8 +11,8 @@ o.clipboard = 'unnamedplus'
 o.termguicolors = true
 opt.undofile = true
 
-vim.api.nvim_create_autocmd('FileType', {
-  group = vim.api.nvim_create_augroup('Options', { clear = true }),
+autocmd('FileType', {
+  group = opts_group,
   callback = function()
     opt.formatoptions:remove 'o'
   end,
