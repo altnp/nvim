@@ -51,7 +51,7 @@ return {
     'hrsh7th/nvim-cmp',
     event = { 'InsertEnter', 'CmdLineEnter' },
     dependencies = {
-      'abecodes/tabout.nvim',
+      'kawre/neotab.nvim',
       'L3MON4D3/LuaSnip',
       'saadparwaiz1/cmp_luasnip',
       'windwp/nvim-autopairs',
@@ -115,7 +115,8 @@ return {
             { 'c', 'i', 's' }
           ),
 
-          ['<Tab>'] = cmp.mapping(function(fallback)
+          ['<Tab>'] = cmp.mapping(function(_)
+            local neotab = require 'neotab'
             if cmp.visible() then
               cmp.confirm {
                 behavior = cmp.ConfirmBehavior.Insert,
@@ -124,7 +125,7 @@ return {
             elseif require('luasnip').expand_or_jumpable() then
               vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-expand-or-jump', true, true, true), '')
             else
-              fallback()
+              neotab.tabout()
             end
           end, { 'c', 'i', 's' }),
 
