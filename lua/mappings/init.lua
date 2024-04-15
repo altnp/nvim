@@ -89,9 +89,6 @@ map('n', '<leader>cc', function()
   end
 end, { desc = 'Blankline Jump to current context' })
 
--- Select Whole Buffer
-map('n', '<leader>a', 'GVgg')
-
 -- Undo with U
 map('n', 'U', '<C-r>', { silent = true })
 map('n', 'u', 'u', { silent = true })

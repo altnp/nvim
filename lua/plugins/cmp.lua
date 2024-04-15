@@ -112,7 +112,7 @@ return {
               behavior = cmp.ConfirmBehavior.Insert,
               select = true,
             },
-            { 'c', 'i', 's' }
+            { 'i', 's' }
           ),
 
           ['<Tab>'] = cmp.mapping(function(_)
@@ -127,7 +127,7 @@ return {
             else
               neotab.tabout()
             end
-          end, { 'c', 'i', 's' }),
+          end, { 'i', 's' }),
 
           ['<S-Tab>'] = cmp.mapping(function(fallback)
             if require('luasnip').jumpable(-1) then
@@ -135,7 +135,7 @@ return {
             else
               fallback()
             end
-          end, { 'c', 'i', 's' }),
+          end, { 'i', 's' }),
         },
       }
     end,
@@ -160,10 +160,16 @@ return {
 
       cmp.setup(opts)
 
+      local cmpMapping = {
+        ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'c', 'i', 's' }),
+        ['<S-Tab>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'c', 'i', 's' }),
+      }
+
       cmp.setup.cmdline('/', {
         sources = {
           { name = 'buffer' },
         },
+        mapping = cmpMapping,
       })
 
       cmp.setup.cmdline(':', {
@@ -184,6 +190,7 @@ return {
             name = 'buffer',
           },
         }),
+        mapping = cmpMapping,
       })
     end,
   },
