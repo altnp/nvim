@@ -90,12 +90,12 @@ return {
         sources = {
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
-          { name = 'buffer' },
+          -- { name = 'buffer' },
           { name = 'nvim_lua' },
           { name = 'path' },
         },
         experimental = {
-          ghost_text = { hl_group = 'DiagnosticUnnecessary' },
+          -- ghost_text = { hl_group = 'DiagnosticUnnecessary' },
         },
         matching = {
           -- disallow_fuzzy_matching = true,
@@ -150,6 +150,7 @@ return {
           callback {
             { label = 'w' },
             { label = 'q' },
+            { label = 'qa' },
             { label = 'so' },
             { label = 'Ex' },
           }

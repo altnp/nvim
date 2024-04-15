@@ -4,7 +4,7 @@ return {
     settings = {
       Lua = {
         completion = {
-          callSnippet = 'Replace',
+          callSnippet = 'Disable', -- Disables snippets for lua_ls
         },
       },
     },

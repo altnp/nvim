@@ -24,6 +24,7 @@ o.splitbelow = true
 o.splitright = true
 opt.list = true
 opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+o.showbreak = '󱞩'
 
 -- Completion
 opt.pumheight = 6
@@ -54,10 +55,10 @@ o.ruler = false
 
 -- Indenting
 o.expandtab = true
-o.shiftwidth = 2
+o.shiftwidth = 4
 o.smartindent = true
-o.tabstop = 2
-o.softtabstop = 2
+o.tabstop = 4
+o.softtabstop = 4
 
 -- Providers
 g['loaded_node_provider'] = 0

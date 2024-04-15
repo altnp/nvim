@@ -22,7 +22,7 @@ return {
           }
         end
         return {
-          -- sources.path,
+          sources.path,
           utils.source.fallback {
             sources.lsp,
             sources.treesitter,

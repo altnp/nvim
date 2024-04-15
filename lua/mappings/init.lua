@@ -25,6 +25,8 @@ map('i', '<C-k>', '<Up>', { desc = 'Move Up' })
 map('i', '<C-S-h>', '<C-o>^')
 map('i', '<C-S-l>', '<C-o>$')
 
+map('i', '<C-BS>', '<C-w>')
+
 -- Window Navigation
 map('n', '<leader>wh', '<C-w>h', { desc = 'Switch Window left' })
 map('n', '<leader>wl', '<C-w>l', { desc = 'Switch Window right' })
@@ -97,7 +99,6 @@ map('n', 'u', 'u', { silent = true })
 -- Clipboard mappings
 map('n', 'Y', 'y$')
 map('n', 'x', '"_x')
-map('n', 's', '"_s')
 map('n', '<leader>p', '"0p')
 map('n', '<leader>P', '"0P')
 map('v', 'p', '"_dP')
@@ -114,6 +115,8 @@ map('n', '<C-S-o>', 'O<Esc>j')
 -- Save and quit remaps
 map('n', '<C-s>', '<cmd>silent up<cr>')
 map('n', '<C-S-s>', '<cmd>silent wa<cr>')
+map('i', '<C-s>', '<cmd>silent up<cr>')
+map('i', '<C-S-s>', '<cmd>silent wa<cr>')
 map('n', '<C-w>', '<cmd>confirm q<cr>')
 map('n', '<C-S-w>', '<cmd>confirm qa<cr>')
 
@@ -149,3 +152,14 @@ map('n', '<RightMouse>', 'y')
 -- Temp
 map('n', '<leader>j', 'J')
 map('v', '<leader>j', 'J')
+
+map('i', '<S-Tab>', function()
+  local col = vim.api.nvim_win_get_cursor(0)[2]
+  if col > 0 then
+    local line = vim.api.nvim_get_current_line()
+    local char_before_cursor = line:sub(col, col)
+    if char_before_cursor == ' ' then
+      vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<BS>', true, true, true), 'i', true)
+    end
+  end
+end, { noremap = true, silent = true })

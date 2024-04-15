@@ -3,15 +3,22 @@ return {
   build = ':TSUpdate',
   event = { 'BufReadPost', 'BufNewFile' },
   cmd = { 'TSInstall', 'TSBufEnable', 'TSBufDisable', 'TSModuleInfo' },
+  dependencies = {
+    'andymass/vim-matchup',
+  },
   opts = {
     ensure_installed = { 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc' },
     auto_install = true,
     highlight = {
       enable = true,
       use_languagetree = true,
-      additional_vim_regex_highlighting = { }
+      additional_vim_regex_highlighting = {},
     },
     indent = { enable = true },
+    matchup = {
+      enable = true,
+      disable_virtual_text = true,
+    },
   },
   config = function(_, opts)
     require('nvim-treesitter.configs').setup(opts)

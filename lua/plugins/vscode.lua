@@ -5,6 +5,8 @@ return {
   config = function()
     require('vscode').load 'dark'
 
+    vim.api.nvim_set_hl(0, 'NonText', { bg = 'NONE', fg = '#569cd6' })
+
     -- LSP
     vim.api.nvim_set_hl(0, 'DiagnosticUnnecessary', { bg = 'NONE', fg = '#51504f' })
 
