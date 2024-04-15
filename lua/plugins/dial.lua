@@ -19,9 +19,6 @@ return {
         augend.date.alias['%Y/%m/%d'],
         augend.constant.alias.bool,
         augend.semver.alias.semver,
-        augend.case.new {
-          types = { 'camelCase', 'PascalCase', 'snake_case', 'SCREAMING_SNAKE_CASE' },
-        },
       },
     }
 

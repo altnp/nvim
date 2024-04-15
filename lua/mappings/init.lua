@@ -160,3 +160,6 @@ map('i', '<S-Tab>', function()
     end
   end
 end, { noremap = true, silent = true })
+
+map('o', 'ae', '<Plug>(textobj-entire-a)``')
+map('o', 'ae', '<Plug>(textobj-entire-i)``')
