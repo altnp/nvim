@@ -1,6 +1,9 @@
 return {
   'stevearc/conform.nvim',
   event = 'BufWritePre',
+  keys = {
+    { '<leader>fm', mode = 'n', desc = 'Format File' },
+  },
   opts = {
     notify_on_error = true,
     formatters_by_ft = {
@@ -9,6 +12,10 @@ return {
   },
   config = function(_, opts)
     require('conform').setup(opts)
+
+    vim.keymap.set('n', '<leader>fm', function()
+      require('conform').format { lsp_fallback = true }
+    end, { desc = 'Format File' })
 
     -- Autoformat
     vim.api.nvim_create_autocmd('BufWritePre', {

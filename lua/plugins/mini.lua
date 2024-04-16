@@ -20,4 +20,16 @@ return {
       },
     },
   },
+  {
+    'echasnovski/mini.splitjoin',
+    keys = {
+      { '<leader>j', mode = 'n', desc = 'Split / Join' },
+      { '<leader>j', mode = 'x', desc = 'Split / Join' },
+    },
+    opts = {
+      mappings = {
+        toggle = '<leader>j',
+      },
+    },
+  },
 }

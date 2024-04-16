@@ -1,58 +1,30 @@
 local map = vim.keymap.set
 
 -- Escape mappings
-map('c', 'jj', '<Esc>')
+map({ 'i', 'c' }, 'jj', '<Esc>', { desc = 'Exit mode' })
 
 -- Buffer Navigation
-map('n', 'H', '^', { desc = '' })
-map('i', 'jj', '<Esc>')
-map('n', 'L', '$')
-map('n', '<Leader>j', 'J')
-map('n', 'J', '10j')
-map('n', 'K', '10k')
-map('n', '<M-h>', '<C-o>')
-map('n', '<M-l>', '<C-i>')
-map('n', '<C-d>', '<C-d>zz')
-map('n', '<C-u>', '<C-u>zz')
-map('o', 'H', '^')
-map('o', 'L', '$')
-map('v', 'J', '10j')
-map('v', 'K', '10k')
-map('i', '<C-h>', '<Left>', { desc = '' })
-map('i', '<C-l>', '<Right>', { desc = 'Move Right' })
-map('i', '<C-j>', '<Down>', { desc = 'Move Down' })
-map('i', '<C-k>', '<Up>', { desc = 'Move Up' })
-map('i', '<C-S-h>', '<C-o>^')
-map('i', '<C-S-l>', '<C-o>$')
+map({ 'n', 'x', 'o' }, 'H', '^', { desc = 'Move to start of line' })
+map({ 'n', 'x', 'o' }, 'L', '$', { desc = 'Move to end of line' })
+map({ 'n', 'x' }, 'J', '10j', { desc = 'Move down 10 lines' })
+map({ 'n', 'x' }, 'K', '10k', { desc = 'Move up 10 lines' })
+map('n', '<M-h>', '<C-o>', { desc = 'Jump backwards' })
+map('n', '<M-l>', '<C-i>', { desc = 'Jump forwards' })
+map('n', '<C-d>', '<C-d>zz', { desc = 'Scroll down' })
+map('n', '<C-u>', '<C-u>zz', { desc = 'Scoll up' })
+map('i', '<C-BS>', '<C-w>', { desc = 'Delete word backwards' })
 
-map('i', '<C-BS>', '<C-w>')
-
--- Window Navigation
-map('n', '<leader>wh', '<C-w>h', { desc = 'Switch Window left' })
-map('n', '<leader>wl', '<C-w>l', { desc = 'Switch Window right' })
-map('n', '<leader>wj', '<C-w>j', { desc = 'Switch Window down' })
-map('n', '<leader>wk', '<C-w>k', { desc = 'Switch Window up' })
-
-map('n', '\\', '<Cmd>split<CR>', { desc = 'Horizontal Split' })
-map('n', '|', '<Cmd>vsplit<CR>', { desc = 'Vertical Split' })
-
-map('n', '<Esc>', '<cmd>noh<CR>', { desc = 'General Clear highlights' })
-
--- Format File
-map('n', '<leader>fm', function()
-  require('conform').format { lsp_fallback = true }
-end, { desc = 'Format File' })
-map('n', '<leader>n', '<cmd>enew<CR>', { desc = 'New File' })
+-- Windows
+map('n', '<C-h>', '<C-w>h', { desc = 'Switch window left' })
+map('n', '<C-l>', '<C-w>l', { desc = 'Switch window right' })
+map('n', '<C-j>', '<C-w>j', { desc = 'Switch window down' })
+map('n', '<C-k>', '<C-w>k', { desc = 'Switch window up' })
+map('n', '\\', '<Cmd>split<CR>', { desc = 'Split window horizontal' })
+map('n', '|', '<Cmd>vsplit<CR>', { desc = 'Split window vertical' })
 
 -- Buffers
-map('n', '<leader><tab>', '<C-^>')
-
--- Comment
-map('n', '<leader>/', function()
-  require('Comment.api').toggle.linewise.current()
-end, { desc = 'Comment Toggle' })
-
-map('v', '<leader>/', "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", { desc = 'Comment Toggle' })
+map('n', '<leader><tab>', '<C-^>', { desc = 'Switch tab' })
+map('n', '<leader>n', '<cmd>enew<CR>', { desc = 'New File' })
 
 -- nvimtree
 map('n', '<leader>e', '<cmd>NvimTreeFocus<CR>', { desc = 'Nvimtree Focus window' })
@@ -94,42 +66,42 @@ map('n', 'U', '<C-r>', { silent = true })
 map('n', 'u', 'u', { silent = true })
 
 -- Clipboard mappings
-map('n', 'Y', 'y$')
-map('n', 'x', '"_x')
-map('n', '<leader>p', '"0p')
-map('n', '<leader>P', '"0P')
-map('v', 'p', '"_dP')
-map('v', '<leader>p', '"_d"0P')
+map('n', 'Y', 'y$', { desc = '' })
+map('n', 'x', '"_x', { desc = '' })
+map('n', '<leader>p', '"0p', { desc = '' })
+map('n', '<leader>P', '"0P', { desc = '' })
+map('v', 'p', '"_dP', { desc = '' })
+map('v', '<leader>p', '"_d"0P', { desc = '' })
 
 -- Find and Replace
-map('n', 'c*', '*``cgn')
-map('n', 'c#', '#``cgN')
+map('n', 'c*', '*``cgn', { desc = '' })
+map('n', 'c#', '#``cgN', { desc = '' })
 
 -- Insert blank lines
 map('n', '<C-o>', "o<Esc>'[k")
-map('n', '<C-S-o>', 'O<Esc>j')
+map('n', '<C-S-o>', 'O<Esc>j', { desc = '' })
 
 -- Save and quit remaps
-map('n', '<C-s>', '<cmd>silent up<cr>')
-map('n', '<C-S-s>', '<cmd>silent wa<cr>')
-map('i', '<C-s>', '<cmd>silent up<cr>')
-map('i', '<C-S-s>', '<cmd>silent wa<cr>')
-map('n', '<C-w>', '<cmd>confirm q<cr>')
-map('n', '<C-S-w>', '<cmd>confirm qa<cr>')
+map('n', '<C-s>', '<cmd>silent up<cr>', { desc = '' })
+map('n', '<C-S-s>', '<cmd>silent wa<cr>', { desc = '' })
+map('i', '<C-s>', '<cmd>silent up<cr>', { desc = '' })
+map('i', '<C-S-s>', '<cmd>silent wa<cr>', { desc = '' })
+map('n', '<C-w>', '<cmd>confirm q<cr>', { desc = '' })
+map('n', '<C-S-w>', '<cmd>confirm qa<cr>', { desc = '' })
 
 -- No operation remaps
-map('i', '<C-q>', '<nop>')
-map('n', '<C-q>', '<nop>')
-map('n', 'Q', '<nop>')
+map('i', '<C-q>', '<nop>', { desc = '' })
+map('n', '<C-q>', '<nop>', { desc = '' })
+map('n', 'Q', '<nop>', { desc = '' })
 
 -- Buffer remaps
 
 -- Enhanced visual mode selection
-map('n', 'vv', 'V')
+map('n', 'vv', 'V', { desc = '' })
 
 -- Text transformation
-map('n', 'gUiw', 'mzgUiw`z')
-map('n', 'guiw', 'mzguiw`z')
+map('n', 'gUiw', 'mzgUiw`z', { desc = '' })
+map('n', 'guiw', 'mzguiw`z', { desc = '' })
 
 -- Smart enter insert...
 map('n', 'i', function()
@@ -140,15 +112,15 @@ map('n', 'i', function()
   end
 end)
 
-map('n', '<M-z>', '<cmd>set wrap!<cr>')
+map('n', '<M-z>', '<cmd>set wrap!<cr>', { desc = '' })
 
 -- Mouse
-map('v', '<RightMouse>', 'y')
-map('n', '<RightMouse>', 'y')
+map('v', '<RightMouse>', 'y', { desc = '' })
+map('n', '<RightMouse>', 'y', { desc = '' })
 
 -- Temp
-map('n', '<leader>j', 'J')
-map('v', '<leader>j', 'J')
+map('n', '<leader>J', 'J', { desc = '' })
+map('v', '<leader>J', 'J', { desc = '' })
 
 map('i', '<S-Tab>', function()
   local col = vim.api.nvim_win_get_cursor(0)[2]
@@ -161,5 +133,9 @@ map('i', '<S-Tab>', function()
   end
 end, { noremap = true, silent = true })
 
-map('o', 'ae', '<Plug>(textobj-entire-a)``')
-map('o', 'ae', '<Plug>(textobj-entire-i)``')
+map('o', 'ae', '<Plug>(textobj-entire-a)``', { desc = '' })
+map('o', 'ae', '<Plug>(textobj-entire-i)``', { desc = '' })
+
+-- Misc
+map('n', '<leader>=', '`[v`]=')
+map('n', '<Esc>', '<cmd>noh<CR>', { desc = 'General Clear highlights' })
