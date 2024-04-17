@@ -52,6 +52,7 @@ opt.whichwrap:append '<>[]hl'
 o.laststatus = 3
 o.showmode = true -- false
 o.ruler = false
+o.showcmd = true
 
 -- Indenting
 o.expandtab = true

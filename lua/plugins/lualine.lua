@@ -48,77 +48,80 @@ return {
       },
     },
   },
-  opts = {
-    options = {
-      icons_enabled = true,
-      theme = 'auto',
-      component_separators = { left = '', right = '' },
-      section_separators = { left = '', right = '' },
-      disabled_filetypes = {
-        statusline = {},
-        winbar = {},
-      },
-      ignore_focus = {},
-      always_divide_middle = true,
-      globalstatus = true,
-      refresh = {
-        statusline = 1000,
-        tabline = 1000,
-        winbar = 1000,
-      },
-    },
-    sections = {
-      lualine_a = {
-        'mode',
-      },
-      lualine_b = { 'branch', 'diff', 'diagnostics' },
-      lualine_c = {
-        {
-          'filetype',
-          icon_only = true,
-          padding = {
-            right = 0,
-            left = 1,
-          },
-        },
-        {
-          'filename',
-          symbols = {
-            modified = '',
-            newfile = '',
-            unnamed = '',
-            readonly = '',
-          },
-          fmt = fmt_filename,
-          padding = {
-            right = 0,
-            left = 0,
-          },
-        },
-      },
-      lualine_x = {
-        {
-          show_macro_recording,
-          color = { fg = '#c74e39' },
-        },
-        show_lsp_progress,
-        'encoding',
-        'fileformat',
-      },
-      lualine_y = { 'progress' },
-      lualine_z = { show_cwd },
-    },
-    inactive_sections = {},
-    tabline = {},
-    winbar = {},
-    inactive_winbar = {},
-    extensions = {
-      'trouble',
-    },
-  },
-  config = function(_, opts)
+  config = function()
     local lualine = require 'lualine'
-    lualine.setup(opts)
+    lualine.setup {
+      options = {
+        icons_enabled = true,
+        theme = 'auto',
+        component_separators = { left = '', right = '' },
+        section_separators = { left = '', right = '' },
+        disabled_filetypes = {
+          statusline = {},
+          winbar = {},
+        },
+        ignore_focus = {},
+        always_divide_middle = true,
+        globalstatus = true,
+        refresh = {
+          statusline = 1000,
+          tabline = 1000,
+          winbar = 1000,
+        },
+      },
+      sections = {
+        lualine_a = {
+          'mode',
+        },
+        lualine_b = { 'branch', 'diff', 'diagnostics' },
+        lualine_c = {
+          {
+            'filetype',
+            icon_only = true,
+            padding = {
+              right = 0,
+              left = 1,
+            },
+          },
+          {
+            'filename',
+            symbols = {
+              modified = '',
+              newfile = '',
+              unnamed = '',
+              readonly = '',
+            },
+            fmt = fmt_filename,
+            padding = {
+              right = 0,
+              left = 0,
+            },
+          },
+        },
+        lualine_x = {
+          {
+            show_macro_recording,
+            color = { fg = '#c74e39' },
+          },
+          {
+            require('noice').api.status.command.get,
+            cond = require('noice').api.status.command.has,
+          },
+          show_lsp_progress,
+          'encoding',
+          'fileformat',
+        },
+        lualine_y = { 'progress' },
+        lualine_z = { show_cwd },
+      },
+      inactive_sections = {},
+      tabline = {},
+      winbar = {},
+      inactive_winbar = {},
+      extensions = {
+        'trouble',
+      },
+    }
 
     vim.api.nvim_create_augroup('LualineUpdates', { clear = true })
     vim.api.nvim_create_autocmd('RecordingEnter', {

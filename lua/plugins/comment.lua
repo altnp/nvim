@@ -7,12 +7,12 @@ return {
     { 'gbc', mode = 'n', desc = 'Comment toggle current block' },
     { 'gb', mode = { 'n', 'o' }, desc = 'Comment toggle blockwise' },
     { 'gb', mode = 'x', desc = 'Comment toggle blockwise (visual)' },
-    { '<leader>/', mode = { 'n', 'x' }, desc = 'Comment toggle' },
+    { '<C-_>', mode = { 'n', 'x' }, desc = 'Comment toggle' }, --- VIM interprets ^/ -> ^_
   },
   config = function(_, opts)
     require('Comment').setup(opts)
 
-    vim.keymap.set('n', '<leader>/', function()
+    vim.keymap.set('n', '<C-_>', function()
       require('Comment.api').toggle.linewise.current()
     end, { desc = 'Comment toggle' })
 

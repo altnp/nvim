@@ -26,9 +26,6 @@ map('n', '|', '<Cmd>vsplit<CR>', { desc = 'Split window vertical' })
 map('n', '<leader><tab>', '<C-^>', { desc = 'Switch tab' })
 map('n', '<leader>n', '<cmd>enew<CR>', { desc = 'New File' })
 
--- nvimtree
-map('n', '<leader>e', '<cmd>NvimTreeFocus<CR>', { desc = 'Nvimtree Focus window' })
-
 -- telescope
 map('n', '<leader>fw', '<cmd>Telescope live_grep<CR>', { desc = 'Telescope Live grep' })
 map('n', '<leader>fb', '<cmd>Telescope buffers<CR>', { desc = 'Telescope Find buffers' })
