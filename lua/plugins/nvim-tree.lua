@@ -38,16 +38,32 @@ return {
         map('r', api.fs.rename_basename, 'Rename')
         map('R', api.fs.rename, 'Rename Full')
         map('m', api.marks.toggle, 'Mark')
-        -- WHY DOES IT FAIL TO OPEN A THIRD SPLIT??
-        -- map('F', api.live_filter.clear)
-        -- map('f', api.live_filter.start)
+
+        -- Esc to clear filter or / search
+        local filterActive = false
+        map('f', function()
+          filterActive = true
+          api.live_filter.start()
+        end, 'Filter')
+        local escFallback = require('utils').get_keymap('n', '<Esc>')
+        map('<Esc>', function()
+          if filterActive then
+            filterActive = false
+            api.live_filter.clear()
+          else
+            if escFallback then
+              vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(escFallback.rhs, true, true, true), 'n', true)
+            end
+          end
+        end, 'Clear filter')
+        map('J', api.node.navigate.sibling.last, 'Move to last item')
+        map('K', api.node.navigate.sibling.first, 'Move to first item')
+
         -- map('ge', api.fs.copy.basename)
-        -- map('H', api.tree.toggle_hidden_filter)
-        -- map('I', api.tree.toggle_gitignore_filter)
-        -- map('J', api.node.navigate.sibling.last)
-        -- map('K', api.node.navigate.sibling.first)
-        -- map('L', api.node.open.toggle_group_empty)
-        -- map('M', api.tree.toggle_no_bookmark_filter)
+        map('H', api.tree.toggle_hidden_filter, 'Toggle hidden items')
+        map('I', api.tree.toggle_gitignore_filter, 'Toggle git items')
+        map('M', api.tree.toggle_no_bookmark_filter, 'Toggle marked items')
+        map('L', api.node.open.toggle_group_empty, 'Toggle emty groups')
         -- map('o', api.node.open.edit)
         -- map('O', api.node.open.no_window_picker)
         -- map('P', api.node.navigate.parent)
@@ -68,7 +84,7 @@ return {
       hijack_cursor = true,
       hijack_unnamed_buffer_when_opening = true,
       sync_root_with_cwd = true,
-      -- select_prompts = true,
+      group_empty = true,
     }
 
     vim.keymap.set('n', '<leader>e', '<cmd>NvimTreeFocus<CR>', { desc = 'Focus File Explorer' })
