@@ -17,7 +17,7 @@ local function show_lsp_progress()
 end
 
 local fmt_filename = function(str, _)
-  for _, v in ipairs { 'NvimTree' } do
+  for _, v in ipairs { 'neo-tree' } do
     if vim.startswith(str, v) then
       return ''
     end
@@ -77,9 +77,9 @@ return {
         lualine_c = {
           {
             'filetype',
-            icon_only = true,
+            icon_only = false, -- true
             padding = {
-              right = 0,
+              right = 1, -- 0
               left = 1,
             },
           },

@@ -7,15 +7,16 @@ return {
     { 'gbc', mode = 'n', desc = 'Comment toggle current block' },
     { 'gb', mode = { 'n', 'o' }, desc = 'Comment toggle blockwise' },
     { 'gb', mode = 'x', desc = 'Comment toggle blockwise (visual)' },
-    { '<C-_>', mode = { 'n', 'x' }, desc = 'Comment toggle' }, --- VIM interprets ^/ -> ^_
+    { '<leader>/', mode = 'n', desc = 'Comment toggle' },
+    { '/', mode = 'x', desc = 'Comment toggle' },
   },
   config = function(_, opts)
     require('Comment').setup(opts)
 
-    vim.keymap.set('n', '<C-_>', function()
+    vim.keymap.set('n', '<leader>/', function()
       require('Comment.api').toggle.linewise.current()
     end, { desc = 'Comment toggle' })
 
-    vim.keymap.set('x', '<leader>/', "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", { desc = 'Comment Toggle' })
+    vim.keymap.set('x', '/', "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", { desc = 'Comment Toggle' })
   end,
 }

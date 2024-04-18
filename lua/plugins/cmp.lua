@@ -141,7 +141,6 @@ return {
     end,
     config = function(_, opts)
       local cmp = require 'cmp'
-
       local source = {
         get_keyword_pattern = function()
           return [[\k\+]]
@@ -157,15 +156,17 @@ return {
         end,
       }
       cmp.register_source('cmdline-short', source)
-
       cmp.setup(opts)
 
       local cmpMapping = {
-        ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'c', 'i', 's' }),
+        ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item {}, { 'c', 'i', 's' }),
         ['<S-Tab>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'c', 'i', 's' }),
       }
 
       cmp.setup.cmdline('/', {
+        completion = {
+          completeopt = 'menu,menuone,noselect',
+        },
         sources = {
           { name = 'buffer' },
         },
@@ -173,6 +174,9 @@ return {
       })
 
       cmp.setup.cmdline(':', {
+        completion = {
+          completeopt = 'menu,menuone,noselect',
+        },
         sources = cmp.config.sources({
           { name = 'path' },
         }, {

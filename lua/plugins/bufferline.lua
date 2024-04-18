@@ -8,7 +8,7 @@ return {
       options = {
         offsets = {
           {
-            filetype = 'NvimTree',
+            filetype = 'neo-tree',
           },
         },
       },

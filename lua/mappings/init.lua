@@ -34,13 +34,13 @@ map('n', '<leader>ff', '<cmd>Telescope find_files<cr>', { desc = 'Telescope Find
 map('n', '<leader>fa', '<cmd>Telescope find_files follow=true no_ignore=true hidden=true<CR>', { desc = 'Telescope Find all files' })
 map('n', '??', '<cmd>Telescope help_tags<cr>', { desc = 'Telescope Help Pages' })
 map('n', '<leader>u', '<cmd>Telescope undo<cr>', { desc = 'Telescope Undo' })
-vim.keymap.set('n', '<leader>pws', function()
-  local word = vim.fn.expand '<cword>'
-  require('telescope.builtin').grep_string { search = word }
-end)
-vim.keymap.set('n', '<leader>ps', function()
-  require('telescope.builtin').grep_string { search = vim.fn.input 'Grep > ' }
-end)
+-- vim.keymap.set('n', '<leader>pws', function()
+--   local word = vim.fn.expand '<cword>'
+--   require('telescope.builtin').grep_string { search = word }
+-- end)
+-- vim.keymap.set('n', '<leader>ps', function()
+--   require('telescope.builtin').grep_string { search = vim.fn.input 'Grep > ' }
+-- end)
 
 -- blankline
 map('n', '<leader>cc', function()
@@ -65,10 +65,18 @@ map('n', 'u', 'u', { silent = true })
 -- Clipboard mappings
 map('n', 'Y', 'y$', { desc = '' })
 map('n', 'x', '"_x', { desc = '' })
-map('n', '<leader>p', '"0p', { desc = '' })
-map('n', '<leader>P', '"0P', { desc = '' })
-map('v', 'p', '"_dP', { desc = '' })
-map('v', '<leader>p', '"_d"0P', { desc = '' })
+map('n', 'X', '"_X', { desc = '' })
+map('n', 'd', '"xd', { desc = '' })
+map('n', 'dd', '"xdd', { desc = '' })
+map('n', 'D', '"xD', { desc = '' })
+map('n', 'c', '"xc', { desc = '' })
+map('n', 'cc', '"xcc', { desc = '' })
+map('n', 'C', '"xC', { desc = '' })
+map('v', 'p', '"xdP', { desc = '' })
+
+map('n', '<leader>p', '"xp', { desc = '' })
+map('n', '<leader>P', '"xP', { desc = '' })
+map('v', '<leader>p', '"xd"xP', { desc = '' })
 
 -- Find and Replace
 map('n', 'c*', '*``cgn', { desc = '' })
@@ -81,8 +89,8 @@ map('n', '<C-S-o>', 'O<Esc>j', { desc = '' })
 -- Save and quit remaps
 map('n', '<C-s>', '<cmd>silent up<cr>', { desc = '' })
 map('n', '<C-S-s>', '<cmd>silent wa<cr>', { desc = '' })
-map('i', '<C-s>', '<cmd>silent up<cr>', { desc = '' })
-map('i', '<C-S-s>', '<cmd>silent wa<cr>', { desc = '' })
+map('i', '<C-s>', '<cmd>silent up<cr><Esc>', { desc = '' })
+map('i', '<C-S-s>', '<cmd>silent wa<cr><Esc>', { desc = '' })
 map('n', '<C-w>', '<cmd>confirm q<cr>', { desc = '' })
 map('n', '<C-S-w>', '<cmd>confirm qa<cr>', { desc = '' })
 
