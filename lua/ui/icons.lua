@@ -1,4 +1,6 @@
-return {
+local M = {}
+
+M.LanguageSymbols = {
   Namespace = '󰅩',
   Text = '',
   Method = '',
@@ -38,3 +40,7 @@ return {
   Package = '',
   Copilot = '',
 }
+
+M.Git = {}
+
+return M

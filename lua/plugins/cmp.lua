@@ -5,7 +5,7 @@
 
 local function kind_overrides(entry, item)
   local override = {}
-  local icons = require 'ui.icons'
+  local icons = require('ui.icons').LanguageSymbols
 
   if vim.tbl_contains({ 'cmdline', 'cmdline-short' }, entry.source.name) then
     override.icon = icons['Event']
@@ -24,7 +24,7 @@ local formatting_style = {
   fields = { 'abbr', 'kind', 'menu' },
   format = function(entry, item)
     local overrides = kind_overrides(entry, item)
-    local icons = require 'ui.icons'
+    local icons = require('ui.icons').LanguageSymbols
     local icon = ' ' .. (overrides.icon or icons[item.kind] or '') .. ' '
 
     item.kind = string.format('%s %s', icon, overrides.kind or item.kind)

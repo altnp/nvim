@@ -83,20 +83,20 @@ return {
               left = 1,
             },
           },
-          {
-            'filename',
-            symbols = {
-              modified = '',
-              newfile = '',
-              unnamed = '',
-              readonly = '',
-            },
-            fmt = fmt_filename,
-            padding = {
-              right = 0,
-              left = 0,
-            },
-          },
+          -- {
+          --   'filename',
+          --   symbols = {
+          --     modified = '',
+          --     newfile = '',
+          --     unnamed = '',
+          --     readonly = '',
+          --   },
+          --   fmt = fmt_filename,
+          --   padding = {
+          --     right = 0,
+          --     left = 0,
+          --   },
+          -- },
         },
         lualine_x = {
           {
