@@ -60,10 +60,19 @@ return {
         },
       },
       filesystem = {
-        hide_dotfiles = false,
-        hide_hidden = false,
-        hide_gitignored = false,
-        hijack_netrw_behavior = 'open_current',
+        filtered_items = {
+          hide_dotfiles = false,
+          hide_hidden = false,
+          hide_gitignored = true,
+          hijack_netrw_behavior = 'open_current',
+          hide_by_name = {
+            'node_modules',
+            '.git',
+            'bin',
+            'obj',
+          },
+          hide_by_pattern = {},
+        },
       },
     }
     vim.keymap.set('n', '<leader>e', '<cmd>Neotree<CR>', { desc = 'Focus tree explorer', silent = true })

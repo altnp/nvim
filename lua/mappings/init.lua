@@ -140,6 +140,7 @@ end, { noremap = true, silent = true })
 
 map('o', 'ae', '<Plug>(textobj-entire-a)``', { desc = '' })
 map('o', 'ae', '<Plug>(textobj-entire-i)``', { desc = '' })
+map('n', '<leader>a', 'v<Plug>(textobj-entire-a)', { desc = '' })
 
 -- Misc
 map('n', '<leader>=', '`[v`]=')
