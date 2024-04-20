@@ -124,8 +124,8 @@ map('v', '<RightMouse>', 'y', { desc = '' })
 map('n', '<RightMouse>', 'y', { desc = '' })
 
 -- Temp
-map('n', '<leader>J', 'J', { desc = '' })
-map('v', '<leader>J', 'J', { desc = '' })
+map('n', '<leader>J', 'J', { desc = 'Join' })
+map('x', '<leader>J', 'J', { desc = 'Join' })
 
 map('i', '<S-Tab>', function()
   local col = vim.api.nvim_win_get_cursor(0)[2]

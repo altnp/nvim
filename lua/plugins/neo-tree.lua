@@ -20,6 +20,7 @@ return {
       hide_root_node = true,
       popup_border_style = 'rounded',
       sort_case_insensitive = true,
+      use_default_mappings = false,
       default_component_configs = {
         modified = {
           symbol = '',
@@ -53,13 +54,56 @@ return {
         toggle = function()
           vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-w><C-p>', true, true, true), 'n', false)
         end,
+        dynamic_cancel = function(state)
+          local preview = require 'neo-tree.sources.common.preview'
+          local renderer = require 'neo-tree.ui.renderer'
+          local fs = require 'neo-tree.sources.filesystem'
+
+          if preview.is_active() then
+            preview.hide()
+          else
+            if state.current_position == 'float' then
+              renderer.close_all_floating_windows()
+            else
+              fs.reset_search(state, true)
+            end
+          end
+        end,
       },
       window = {
         mappings = {
           ['<leader>e'] = 'toggle',
+          ['\\'] = 'open_split',
+          ['|'] = 'open_vsplit',
+          ['W'] = 'close_all_nodes',
+          ['<2-LeftMouse>'] = 'open',
+          ['<CR>'] = 'open',
+          ['P'] = { 'toggle_preview', config = { use_float = true, use_image_nvim = false } },
+          ['a'] = {
+            'add',
+            config = {
+              show_path = 'none',
+            },
+          },
+          ['d'] = 'delete',
+          ['r'] = 'rename',
+          ['c'] = 'copy_to_clipboard',
+          ['x'] = 'cut_to_clipboard',
+          ['p'] = 'paste_from_clipboard',
+          ['?'] = 'show_help',
+          ['q'] = 'close_window',
         },
       },
       filesystem = {
+        window = {
+          mappings = {
+            ['H'] = 'toggle_hidden',
+            ['/'] = 'filter_on_submit',
+            ['-'] = 'navigate_up',
+            ['.'] = 'set_root',
+            ['<Esc>'] = 'dynamic_cancel',
+          },
+        },
         filtered_items = {
           hide_dotfiles = false,
           hide_hidden = false,
@@ -72,6 +116,21 @@ return {
             'obj',
           },
           hide_by_pattern = {},
+        },
+        find_args = {
+          fd = {
+            '--exclude',
+            '.git',
+            '--exclude',
+            'node_modules',
+            '--exclude',
+            'bin',
+            '--exclude',
+            'obj',
+          },
+        },
+        follow_current_file = {
+          enabled = true,
         },
       },
     }
