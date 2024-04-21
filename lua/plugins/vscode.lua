@@ -22,5 +22,12 @@ return {
     vim.api.nvim_set_hl(0, 'CmpItemKindKeyword', { bg = 'NONE', fg = '#D4D4D4' })
     vim.api.nvim_set_hl(0, 'CmpItemKindProperty', { link = 'CmpItemKindKeyword' })
     vim.api.nvim_set_hl(0, 'CmpItemKindUnit', { link = 'CmpItemKindKeyword' })
+
+    vim.api.nvim_set_hl(0, 'NeoTreeNormal', { bg = '#181818' })
+    vim.api.nvim_set_hl(0, 'NeoTreeNormalNC', { bg = '#181818' })
+    vim.api.nvim_set_hl(0, 'NeoTreeWinSeparator', { fg = '#181818', bg = '#181818' })
+    vim.api.nvim_set_hl(0, 'NeoTreeWinSeparator', { fg = '#181818', bg = '#181818' })
+    vim.api.nvim_set_hl(0, 'NeoTreeDirectoryIcon', { fg = '#569cd6' })
+    vim.api.nvim_set_hl(0, 'NeoTreeDirectoryName', { fg = '#569cd6' })
   end,
 }

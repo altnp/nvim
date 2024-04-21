@@ -19,6 +19,7 @@ return {
       Lua = {
         completion = {
           callSnippet = 'Disable', -- Disables snippets for lua_ls
+          workspaceWord = false,
         },
       },
     },

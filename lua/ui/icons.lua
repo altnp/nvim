@@ -41,6 +41,17 @@ M.LanguageSymbols = {
   Copilot = '',
 }
 
-M.Git = {}
+M.GitSymbols = {
+  Added = '+',
+  Deleted = '-',
+  Modified = '~',
+}
+
+M.DiagnosticsSymbols = {
+  Hint = '',
+  Info = '',
+  Warn = '',
+  Error = '',
+}
 
 return M

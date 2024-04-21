@@ -1,7 +1,7 @@
+local icons = require 'ui.icons'
 return {
   'nvim-neo-tree/neo-tree.nvim',
   event = 'VeryLazy',
-  -- branch = 'v3.x',
   dependencies = {
     'nvim-lua/plenary.nvim',
     'nvim-tree/nvim-web-devicons',
@@ -27,17 +27,17 @@ return {
         },
         diagnostics = {
           symbols = {
-            hint = '',
-            info = '',
-            warn = '',
-            error = '',
+            hint = icons.DiagnosticsSymbols.Hint,
+            info = icons.DiagnosticsSymbols.Info,
+            warn = icons.DiagnosticsSymbols.Warn,
+            error = icons.DiagnosticsSymbols.Error,
           },
         },
         git_status = {
           symbols = {
-            added = '+',
-            deleted = '-',
-            modified = '~',
+            added = icons.GitSymbols.Added,
+            deleted = icons.GitSymbols.Deleted,
+            modified = icons.GitSymbols.Modified,
             renamed = '',
             untracked = '',
             ignored = '',

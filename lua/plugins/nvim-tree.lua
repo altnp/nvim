@@ -1,3 +1,4 @@
+-- Currently disabled in favor of neo-tree
 return {
   'nvim-tree/nvim-tree.lua',
   enabled = false,
