@@ -109,13 +109,16 @@ map('n', 'gUiw', 'mzgUiw`z', { desc = '' })
 map('n', 'guiw', 'mzguiw`z', { desc = '' })
 
 -- Smart enter insert...
-map('n', 'i', function()
-  if vim.fn.getline('.'):match '^%s*$' then
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('"_cc', true, false, true), 'n', false)
+-- NOTE: Feedkeys breaks macros so we have to do this goofy global function
+vim.api.nvim_set_keymap('n', 'i', 'v:lua.SmartInsert()', { expr = true, noremap = true })
+
+function _G.SmartInsert()
+  if vim.fn.getline '.' == '' or vim.fn.getline('.'):match '^%s*$' then
+    return '"_cc'
   else
-    vim.api.nvim_feedkeys('i', 'n', false)
+    return 'i'
   end
-end)
+end
 
 map('n', '<M-z>', '<cmd>set wrap!<cr>', { desc = '' })
 

@@ -65,7 +65,7 @@ return {
         grep_previewer = require('telescope.previewers').vim_buffer_vimgrep.new,
         qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
         buffer_previewer_maker = require('telescope.previewers').buffer_previewer_maker,
-        -- default_mappings = nil,
+        default_mappings = nil,
         mappings = {
           n = {
             ['q'] = require('telescope.actions').close,
@@ -101,6 +101,53 @@ return {
                 end
               end
             end,
+            ['gg'] = require('telescope.actions').move_to_top,
+            ['G'] = require('telescope.actions').move_to_bottom,
+            ['<CR>'] = require('telescope.actions').select_default,
+            ['|'] = require('telescope.actions').select_vertical,
+            ['\\'] = require('telescope.actions').select_horizontal,
+            ['<leader>q'] = require('telescope.actions').send_selected_to_qflist + require('telescope.actions').open_qflist,
+            ['<Tab>'] = require('telescope.actions').toggle_selection,
+          },
+          i = {
+            ['<2-LeftMouse>'] = require('telescope.actions').double_mouse_click,
+            ['<LeftMouse>'] = require('telescope.actions').mouse_click,
+            ['<C-j>'] = require('telescope.actions').move_selection_next,
+            ['J'] = function(prompt_bufnr)
+              local actions = require 'telescope.actions'
+              local action_state = require 'telescope.actions.state'
+              local current_picker = action_state.get_current_picker(prompt_bufnr)
+              local max_line = #current_picker.finder.results
+
+              if current_picker:get_selection_row() <= max_line - 1 then
+                local lines = require('math').min(max_line - current_picker:get_selection_row() - 1, 5)
+                print(lines)
+                for _ = 1, lines do
+                  actions.move_selection_next(prompt_bufnr)
+                end
+              end
+            end,
+            ['k'] = require('telescope.actions').move_selection_previous,
+            ['K'] = function(prompt_bufnr)
+              local actions = require 'telescope.actions'
+              local action_state = require 'telescope.actions.state'
+              local current_picker = action_state.get_current_picker(prompt_bufnr)
+
+              if current_picker:get_selection_row() > 0 then
+                local lines = require('math').min(current_picker:get_selection_row(), 5)
+                print(lines)
+                for _ = 1, lines do
+                  actions.move_selection_previous(prompt_bufnr)
+                end
+              end
+            end,
+            ['gg'] = require('telescope.actions').move_to_top,
+            ['G'] = require('telescope.actions').move_to_bottom,
+            ['<CR>'] = require('telescope.actions').select_default,
+            ['|'] = require('telescope.actions').select_vertical,
+            ['\\'] = require('telescope.actions').select_horizontal,
+            ['<leader>q'] = require('telescope.actions').send_selected_to_qflist + require('telescope.actions').open_qflist,
+            ['<Tab>'] = require('telescope.actions').toggle_selection,
           },
         },
       },

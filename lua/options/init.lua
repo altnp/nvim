@@ -46,6 +46,7 @@ opt.cursorlineopt = 'both'
 vim.o.guicursor = vim.o.guicursor .. ',a:blinkon100'
 opt.mouse = 'a'
 opt.whichwrap:append '<>[]hl'
+opt.wrap = false
 
 -- Status Line
 opt.laststatus = 3

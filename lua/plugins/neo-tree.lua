@@ -72,7 +72,7 @@ return {
       },
       window = {
         mappings = {
-          ['<leader>e'] = 'toggle',
+          ['<leader>e'] = { 'toggle' },
           ['\\'] = 'open_split',
           ['|'] = 'open_vsplit',
           ['W'] = 'close_all_nodes',
