@@ -28,7 +28,7 @@ return {
           map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
           map('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
           map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
-          map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+          map('<leader>rr', vim.lsp.buf.rename, '[R]e[n]ame')
           map('<C-n>', vim.lsp.buf.code_action, '[C]ode [A]ction') -- VIM interprets ^. as ^N
           -- vim.keymap.set('i', '<C-h>', function()
           --   vim.lsp.buf.signature_help()

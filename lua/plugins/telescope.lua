@@ -17,8 +17,8 @@ return {
     'benfowler/telescope-luasnip.nvim',
     'debugloop/telescope-undo.nvim',
   },
-  opts = function()
-    return {
+  config = function()
+    require('telescope').setup {
       defaults = {
         vimgrep_arguments = {
           'rg',
@@ -50,10 +50,13 @@ return {
           height = 0.80,
           preview_cutoff = 120,
         },
-        file_sorter = require('telescope.sorters').get_fuzzy_file,
+        -- file_sorter = require('telescope.sorters').get_fuzzy_file,
         file_ignore_patterns = { 'node_modules' },
-        generic_sorter = require('telescope.sorters').get_generic_fuzzy_sorter,
-        path_display = { 'truncate' },
+        -- generic_sorter = require('telescope.sorters').get_generic_fuzzy_sorter,
+        path_display = function(_, path)
+          local tail = require('telescope.utils').path_tail(path)
+          return string.format('%s (%s)', tail, path)
+        end,
         winblend = 0,
         border = {},
         borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
@@ -63,6 +66,7 @@ return {
         grep_previewer = require('telescope.previewers').vim_buffer_vimgrep.new,
         qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
         buffer_previewer_maker = require('telescope.previewers').buffer_previewer_maker,
+        -- default_mappings = nil,
         mappings = {
           n = { ['q'] = require('telescope.actions').close },
         },
@@ -80,9 +84,6 @@ return {
         undo = {},
       },
     }
-  end,
-  config = function(_, opts)
-    require('telescope').setup(opts)
 
     require('telescope').load_extension 'fzf'
     require('telescope').load_extension 'ui-select'
