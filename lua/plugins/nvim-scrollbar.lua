@@ -9,11 +9,13 @@ return {
     require('scrollbar').setup {
       hide_if_all_visible = true,
       throttle_ms = 10,
-      marks = {
-        Cursor = {
-          highlight = 'CursorColumn',
-          text = ' ',
-        },
+      show_in_active_only = true,
+      marks = {},
+      excluded_filetypes = {
+        'neo-tree',
+      },
+      handlers = {
+        cursor = false,
       },
     }
   end,

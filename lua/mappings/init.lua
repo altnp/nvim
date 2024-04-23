@@ -145,3 +145,8 @@ map('n', '<leader>a', 'v<Plug>(textobj-entire-a)', { desc = '' })
 -- Misc
 map('n', '<leader>=', '`[v`]=')
 map('n', '<Esc>', '<cmd>noh<CR>', { desc = 'General Clear highlights' })
+
+map('n', '<Left>', '<cmd>vertical resize -2<cr>', { desc = '' })
+map('n', '<Right>', '<cmd>vertical resize +2<cr>', { desc = '' })
+map('n', '<Down>', '<cmd>horizontal resize -2<cr>', { desc = '' })
+map('n', '<Up>', '<cmd>horizontal resize +2<cr>', { desc = '' })
