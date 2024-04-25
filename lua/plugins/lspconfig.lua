@@ -22,7 +22,6 @@ return {
           map('<leader>lf', vim.diagnostic.open_float, 'Lsp floating diagnostics')
           map('[d', vim.diagnostic.goto_prev, 'Lsp prev diagnostic')
           map(']d', vim.diagnostic.goto_next, 'Lsp next diagnostic')
-          map('<leader>q', vim.diagnostic.setloclist, 'Lsp diagnostic loclist')
 
           map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
           map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
@@ -37,7 +36,7 @@ return {
           --   vim.lsp.buf.signature_help()
           -- end, opts)
           -- TODO: Map Key?
-          -- map('K', vim.lsp.buf.hover, 'Hover Documentation')
+          map('<C-Space>', vim.lsp.buf.hover, 'Hover Documentation')
 
           -- Hilight current token when cursor is inactive foro {updatetimkkh}
           local client = vim.lsp.get_client_by_id(event.data.client_id)

@@ -1,4 +1,6 @@
-local map = vim.keymap.set
+local map = function(mode, lhs, rhs, opts)
+  vim.keymap.set(mode, lhs, rhs, vim.tbl_deep_extend('force', { silent = true }, opts or {}))
+end
 
 -- Escape mappings
 map({ 'i', 'c' }, 'jj', '<Esc>', { desc = 'Exit mode' })
@@ -21,13 +23,17 @@ map('n', '<C-j>', '<C-w>j', { desc = 'Switch window down' })
 map('n', '<C-k>', '<C-w>k', { desc = 'Switch window up' })
 map('n', '\\', '<Cmd>split<CR>', { desc = 'Split window horizontal' })
 map('n', '|', '<Cmd>vsplit<CR>', { desc = 'Split window vertical' })
+map('n', '<Left>', '<cmd>vertical resize -2<cr>', { desc = '' })
+map('n', '<Right>', '<cmd>vertical resize +2<cr>', { desc = '' })
+map('n', '<Down>', '<cmd>horizontal resize -2<cr>', { desc = '' })
+map('n', '<Up>', '<cmd>horizontal resize +2<cr>', { desc = '' })
 
 -- Buffers
 map('n', '<leader><tab>', '<C-^>', { desc = 'Switch tab' })
 map('n', '<leader>n', '<cmd>enew<CR>', { desc = 'New File' })
 
 -- blankline
-map('n', '<leader>cc', function()
+map('n', '<leader><leader>', function()
   local config = { scope = {} }
   config.scope.exclude = { language = {}, node_type = {} }
   config.scope.include = { node_type = {} }
@@ -40,11 +46,11 @@ map('n', '<leader>cc', function()
       vim.api.nvim_feedkeys('_', 'n', true)
     end
   end
-end, { desc = 'Blankline Jump to current context' })
+end, { desc = 'Jump to current context' })
 
 -- Undo with U
-map('n', 'U', '<C-r>', { silent = true })
-map('n', 'u', 'u', { silent = true })
+map('n', 'U', '<C-r>', { desc = 'Redo' })
+map('n', 'u', 'u', { desc = 'Undo' })
 
 -- Clipboard mappings
 map('n', 'Y', 'y$', { desc = '' })
@@ -63,12 +69,11 @@ map('n', '<leader>P', '"xP', { desc = '' })
 map('v', '<leader>p', '"xd"xP', { desc = '' })
 
 -- Find and Replace
-map('n', 'c*', '*``cgn', { desc = '' })
-map('n', 'c#', '#``cgN', { desc = '' })
+map('n', 'c*', '*``cgn', { desc = 'Change current word' })
 
 -- Insert blank lines
-map('n', '<C-o>', "o<Esc>'[k")
-map('n', '<C-S-o>', 'O<Esc>j', { desc = '' })
+map('n', '<CR>', 'o<Esc>', { desc = '' })
+map('n', '<S-CR>', 'O<Esc>', { desc = '' })
 
 -- Save and quit remaps
 map('n', '<C-s>', '<cmd>silent up<cr>', { desc = '' })
@@ -82,8 +87,6 @@ map('n', '<C-S-w>', '<cmd>confirm qa<cr>', { desc = '' })
 map('i', '<C-q>', '<nop>', { desc = '' })
 map('n', '<C-q>', '<nop>', { desc = '' })
 map('n', 'Q', '<nop>', { desc = '' })
-
--- Buffer remaps
 
 -- Enhanced visual mode selection
 map('n', 'vv', 'V', { desc = '' })
@@ -132,8 +135,3 @@ map('n', '<leader>a', 'v<Plug>(textobj-entire-a)', { desc = '' })
 -- Misc
 map('n', '<leader>=', '`[v`]=')
 map('n', '<Esc>', '<cmd>noh<CR>', { desc = 'General Clear highlights' })
-
-map('n', '<Left>', '<cmd>vertical resize -2<cr>', { desc = '' })
-map('n', '<Right>', '<cmd>vertical resize +2<cr>', { desc = '' })
-map('n', '<Down>', '<cmd>horizontal resize -2<cr>', { desc = '' })
-map('n', '<Up>', '<cmd>horizontal resize +2<cr>', { desc = '' })

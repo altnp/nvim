@@ -71,5 +71,8 @@ g['loaded_python3_provider'] = 0
 g['loaded_perl_provider'] = 0
 g['loaded_ruby_provider'] = 0
 
+-- Notifications
+opt.report = 999999
+
 local is_windows = vim.fn.has 'win32' ~= 0
 vim.env.PATH = vim.fn.stdpath 'data' .. '/mason/bin' .. (is_windows and ';' or ':') .. vim.env.PATH

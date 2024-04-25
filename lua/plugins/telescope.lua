@@ -5,7 +5,7 @@ return {
     { '<leader>ff', mode = 'n', desc = 'Telescope find files' },
     { '<leader>fa', mode = 'n', desc = 'Telescope find all files' },
     { '<leader>fw', mode = 'n', desc = 'Telescope grep files' },
-    { '<leader>fa', mode = 'n', desc = 'Telescope find all files' },
+    { '<leader>fz', mode = 'n', desc = 'Telescope search current buffer' },
     { '<leader>fb', mode = 'n', desc = 'Telescope find buffers' },
     { '??', mode = 'n', desc = 'Telescop find help pages' },
   },
