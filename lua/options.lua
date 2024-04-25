@@ -34,7 +34,7 @@ opt.relativenumber = true
 opt.number = true
 opt.numberwidth = 2
 opt.foldcolumn = '1'
-opt.fillchars = { eob = ' ', fold = ' ', foldopen = '󰅀', foldsep = ' ', foldclose = '' }
+opt.fillchars = { eob = ' ', fold = ' ', foldopen = '󰅀', foldsep = ' ', foldclose = '' }
 opt.foldlevel = 99
 opt.foldlevelstart = 99
 opt.foldenable = true
