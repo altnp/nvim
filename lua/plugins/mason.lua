@@ -31,7 +31,7 @@ return {
       'williamboman/mason-lspconfig.nvim',
     },
     opts = function()
-      local ensure_installed = vim.tbl_keys(require 'configs.lsp-servers' or {})
+      local ensure_installed = vim.tbl_keys(require 'configs.lsp' or {})
       vim.list_extend(ensure_installed, {
         'stylua',
       })

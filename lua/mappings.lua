@@ -29,6 +29,8 @@ map('n', '<Down>', '<cmd>horizontal resize -2<cr>', { desc = '' })
 map('n', '<Up>', '<cmd>horizontal resize +2<cr>', { desc = '' })
 
 -- Buffers
+map('n', '<Tab>', '<cmd>:bnext<CR>', { desc = 'Switch next buffer' })
+map('n', '<S-Tab>', '<cmd>:bprevious<CR>', { desc = 'Switch previous buffer' })
 map('n', '<leader><tab>', '<C-^>', { desc = 'Switch tab' })
 map('n', '<leader>n', '<cmd>enew<CR>', { desc = 'New File' })
 
@@ -138,3 +140,5 @@ map('n', '<Esc>', '<cmd>noh<CR>', { desc = 'General Clear highlights' })
 
 map('v', '>', 'mz>gv`z')
 map('v', '<', 'mz<gv`z')
+
+map('n', '<leader>q', '<cmd>:copen<CR>', { desc = 'Open quickfix list' })

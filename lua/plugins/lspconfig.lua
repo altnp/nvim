@@ -62,7 +62,7 @@ return {
       require('mason-lspconfig').setup {
         handlers = {
           function(server_name)
-            local server = require('configs.lsp-servers')[server_name] or {}
+            local server = require('configs.lsp')[server_name] or {}
 
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
             require('lspconfig')[server_name].setup(server)
