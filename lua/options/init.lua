@@ -33,7 +33,11 @@ opt.signcolumn = 'yes'
 opt.relativenumber = true
 opt.number = true
 opt.numberwidth = 2
-opt.fillchars = { eob = ' ' }
+opt.foldcolumn = '1'
+opt.fillchars = { eob = ' ', fold = ' ', foldopen = '󰅀', foldsep = ' ', foldclose = '' }
+opt.foldlevel = 99
+opt.foldlevelstart = 99
+opt.foldenable = true
 
 -- Find and Replace
 opt.ignorecase = true

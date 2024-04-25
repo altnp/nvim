@@ -136,5 +136,14 @@ return {
     }
     vim.keymap.set('n', '<leader>e', '<cmd>Neotree<CR>', { desc = 'Focus tree explorer', silent = true })
     vim.keymap.set('n', '<leader>E', '<cmd>Neotree reveal<CR>', { desc = 'Focus tree explorer', silent = true })
+
+    vim.api.nvim_create_autocmd('BufWinEnter', {
+      pattern = '*',
+      callback = function()
+        if vim.bo.filetype == 'neo-tree' then
+          vim.wo.foldcolumn = '0'
+        end
+      end,
+    })
   end,
 }

@@ -1,6 +1,14 @@
 return {
   'nvim-telescope/telescope.nvim',
   cmd = 'Telescope',
+  keys = {
+    { '<leader>ff', mode = 'n', desc = 'Telescope find files' },
+    { '<leader>fa', mode = 'n', desc = 'Telescope find all files' },
+    { '<leader>fw', mode = 'n', desc = 'Telescope grep files' },
+    { '<leader>fa', mode = 'n', desc = 'Telescope find all files' },
+    { '<leader>fb', mode = 'n', desc = 'Telescope find buffers' },
+    { '??', mode = 'n', desc = 'Telescop find help pages' },
+  },
   dependencies = {
     'nvim-lua/plenary.nvim',
     'nvim-treesitter/nvim-treesitter',
@@ -113,7 +121,7 @@ return {
             ['<2-LeftMouse>'] = require('telescope.actions').double_mouse_click,
             ['<LeftMouse>'] = require('telescope.actions').mouse_click,
             ['<C-j>'] = require('telescope.actions').move_selection_next,
-            ['J'] = function(prompt_bufnr)
+            ['<C-J>'] = function(prompt_bufnr)
               local actions = require 'telescope.actions'
               local action_state = require 'telescope.actions.state'
               local current_picker = action_state.get_current_picker(prompt_bufnr)
@@ -127,8 +135,8 @@ return {
                 end
               end
             end,
-            ['k'] = require('telescope.actions').move_selection_previous,
-            ['K'] = function(prompt_bufnr)
+            ['<C-k>'] = require('telescope.actions').move_selection_previous,
+            ['<C-K>'] = function(prompt_bufnr)
               local actions = require 'telescope.actions'
               local action_state = require 'telescope.actions.state'
               local current_picker = action_state.get_current_picker(prompt_bufnr)
@@ -141,13 +149,23 @@ return {
                 end
               end
             end,
-            ['gg'] = require('telescope.actions').move_to_top,
-            ['G'] = require('telescope.actions').move_to_bottom,
             ['<CR>'] = require('telescope.actions').select_default,
-            ['|'] = require('telescope.actions').select_vertical,
-            ['\\'] = require('telescope.actions').select_horizontal,
-            ['<leader>q'] = require('telescope.actions').send_selected_to_qflist + require('telescope.actions').open_qflist,
-            ['<Tab>'] = require('telescope.actions').toggle_selection,
+            ['<C-|>'] = require('telescope.actions').select_vertical,
+            ['<C-\\>'] = require('telescope.actions').select_horizontal,
+            ['<Esc>'] = require('telescope.actions').close,
+          },
+        },
+      },
+      pickers = {
+        buffers = {
+          previewer = false,
+          layout_config = {
+            width = { 0.87, max = 120 },
+          },
+          mappings = {
+            n = {
+              ['<leader>d'] = require('telescope.actions').delete_buffer,
+            },
           },
         },
       },
@@ -169,5 +187,34 @@ return {
     require('telescope').load_extension 'ui-select'
     require('telescope').load_extension 'undo'
     require('telescope').load_extension 'luasnip'
+
+    local builtin = require 'telescope.builtin'
+    vim.keymap.set('n', '<leader>fw', function()
+      builtin.live_grep()
+    end, { desc = 'Telescope Live grep' })
+
+    vim.keymap.set('n', '<leader>fb', function()
+      builtin.buffers()
+    end, { desc = 'Telescope Find buffers' })
+
+    vim.keymap.set('n', '<leader>fz', function()
+      builtin.current_buffer_fuzzy_find()
+    end, { desc = 'Telescope Find in current buffer' })
+
+    vim.keymap.set('n', '<leader>ff', function()
+      builtin.find_files()
+    end, { desc = 'Telescope Find files' })
+
+    vim.keymap.set('n', '<leader>fa', function()
+      builtin.find_files {
+        no_ignore = true,
+        hidden = true,
+        follow = true,
+      }
+    end, { desc = 'Telescope Find all files' })
+
+    vim.keymap.set('n', '??', function()
+      builtin.help_tags()
+    end, { desc = 'Telescope Help Pages' })
   end,
 }

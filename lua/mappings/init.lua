@@ -26,22 +26,6 @@ map('n', '|', '<Cmd>vsplit<CR>', { desc = 'Split window vertical' })
 map('n', '<leader><tab>', '<C-^>', { desc = 'Switch tab' })
 map('n', '<leader>n', '<cmd>enew<CR>', { desc = 'New File' })
 
--- telescope
-map('n', '<leader>fw', '<cmd>Telescope live_grep<CR>', { desc = 'Telescope Live grep' })
-map('n', '<leader>fb', '<cmd>Telescope buffers<CR>', { desc = 'Telescope Find buffers' })
-map('n', '<leader>fz', '<cmd>Telescope current_buffer_fuzzy_find<CR>', { desc = 'Telescope Find in current buffer' })
-map('n', '<leader>ff', '<cmd>Telescope find_files<cr>', { desc = 'Telescope Find files' })
-map('n', '<leader>fa', '<cmd>Telescope find_files follow=true no_ignore=true hidden=true<CR>', { desc = 'Telescope Find all files' })
-map('n', '??', '<cmd>Telescope help_tags<cr>', { desc = 'Telescope Help Pages' })
-map('n', '<leader>u', '<cmd>Telescope undo<cr>', { desc = 'Telescope Undo' })
--- vim.keymap.set('n', '<leader>pws', function()
---   local word = vim.fn.expand '<cword>'
---   require('telescope.builtin').grep_string { search = word }
--- end)
--- vim.keymap.set('n', '<leader>ps', function()
---   require('telescope.builtin').grep_string { search = vim.fn.input 'Grep > ' }
--- end)
-
 -- blankline
 map('n', '<leader>cc', function()
   local config = { scope = {} }

@@ -5,7 +5,10 @@ return {
     dependencies = {
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
-      { 'folke/neodev.nvim', opts = {} },
+      {
+        'folke/neodev.nvim',
+        opts = {},
+      },
     },
     config = function()
       vim.api.nvim_create_autocmd('LspAttach', {
@@ -54,8 +57,8 @@ return {
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
-      -- capabilities.textDocument.completion.completionItem.snippetSupport = false
 
+      -- capabilities.textDocument.completion.completionItem.snippetSupport = false
       require('mason-lspconfig').setup {
         handlers = {
           function(server_name)
