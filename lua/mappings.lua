@@ -63,6 +63,7 @@ map('n', 'c', '"xc', { desc = '' })
 map('n', 'cc', '"xcc', { desc = '' })
 map('n', 'C', '"xC', { desc = '' })
 map('v', 'p', '"xdP', { desc = '' })
+map('v', '<C-c>', 'y', { desc = '' }) -- Retain copy in visual for when using mouse
 
 map('n', '<leader>p', '"xp', { desc = '' })
 map('n', '<leader>P', '"xP', { desc = '' })
@@ -113,7 +114,7 @@ map('n', '<M-z>', '<cmd>set wrap!<cr>', { desc = '' })
 map('v', '<RightMouse>', 'y', { desc = '' })
 map('n', '<RightMouse>', 'y', { desc = '' })
 
--- Temp
+-- Misc
 map('n', '<leader>J', 'J', { desc = 'Join' })
 map('x', '<leader>J', 'J', { desc = 'Join' })
 
@@ -132,6 +133,8 @@ map('o', 'ae', '<Plug>(textobj-entire-a)``', { desc = '' })
 map('o', 'ae', '<Plug>(textobj-entire-i)``', { desc = '' })
 map('n', '<leader>a', 'v<Plug>(textobj-entire-a)', { desc = '' })
 
--- Misc
 map('n', '<leader>=', '`[v`]=')
 map('n', '<Esc>', '<cmd>noh<CR>', { desc = 'General Clear highlights' })
+
+map('v', '>', 'mz>gv`z')
+map('v', '<', 'mz<gv`z')

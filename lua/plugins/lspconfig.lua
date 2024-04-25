@@ -22,6 +22,7 @@ return {
           map('<leader>lf', vim.diagnostic.open_float, 'Lsp floating diagnostics')
           map('[d', vim.diagnostic.goto_prev, 'Lsp prev diagnostic')
           map(']d', vim.diagnostic.goto_next, 'Lsp next diagnostic')
+          map('<leader>d', vim.diagnostic.setloclist, 'Lsp diagnostic loclist')
 
           map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
           map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
