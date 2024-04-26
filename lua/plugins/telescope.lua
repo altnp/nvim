@@ -159,6 +159,11 @@ return {
       },
       pickers = {
         buffers = {
+          -- path_display = function(_, path)
+          --   local tail = require('telescope.utils').path_tail(path)
+          --   print(string.format('%s', tail))
+          --   return string.format('%s (%s)', tail, path)
+          -- end,
           previewer = false,
           layout_config = {
             width = { 0.87, max = 120 },

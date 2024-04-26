@@ -9,13 +9,13 @@ return {
       relculright = true,
       ft_ignore = { 'neotree' },
       segments = {
-        { text = { builtin.foldfunc }, click = 'v:lua.ScFa' },
-        { text = { '%s' }, click = 'v:lua.ScSa' },
+        { text = { ' %s ' }, click = 'v:lua.ScSa' },
         {
           text = { builtin.lnumfunc, ' ' },
           condition = { true, builtin.not_empty },
           click = 'v:lua.ScLa',
         },
+        { text = { builtin.foldfunc }, click = 'v:lua.ScFa' },
         -- {
         --   sign = { name = { 'Diagnostic' }, maxwidth = 2, auto = true },
         --   click = 'v:lua.ScSa',
