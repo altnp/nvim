@@ -9,7 +9,7 @@ return {
     'windwp/nvim-ts-autotag',
   },
   opts = {
-    ensure_installed = { 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'c_sharp', 'bash', 'javascript', 'typescript' },
+    ensure_installed = { 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'c_sharp', 'bash', 'javascript', 'typescript', 'regex' },
     auto_install = true,
     highlight = {
       enable = true,

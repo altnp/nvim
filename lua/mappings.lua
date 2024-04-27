@@ -29,8 +29,8 @@ map('n', '<Down>', '<cmd>horizontal resize -2<cr>', { desc = '' })
 map('n', '<Up>', '<cmd>horizontal resize +2<cr>', { desc = '' })
 
 -- Buffers
-map('n', '<Tab>', '<cmd>:bnext<CR>', { desc = 'Switch next buffer' })
-map('n', '<S-Tab>', '<cmd>:bprevious<CR>', { desc = 'Switch previous buffer' })
+-- map('n', '<Tab>', '<cmd>:bnext<CR>', { desc = 'Switch next buffer' })
+-- map('n', '<S-Tab>', '<cmd>:bprevious<CR>', { desc = 'Switch previous buffer' })
 map('n', '<leader><tab>', '<C-^>', { desc = 'Switch tab' })
 map('n', '<leader>n', '<cmd>enew<CR>', { desc = 'New File' })
 
@@ -70,6 +70,9 @@ map('v', '<C-c>', 'y', { desc = '' }) -- Retain copy in visual for when using mo
 map('n', '<leader>p', '"xp', { desc = '' })
 map('n', '<leader>P', '"xP', { desc = '' })
 map('v', '<leader>p', '"xd"xP', { desc = '' })
+
+map('c', '<C-p>', '<C-r>+')
+map('i', '<C-p>', '<C-o>p')
 
 -- Find and Replace
 map('n', 'c*', '*``cgn', { desc = 'Change current word' })
@@ -142,3 +145,5 @@ map('v', '>', 'mz>gv`z')
 map('v', '<', 'mz<gv`z')
 
 map('n', '<leader>q', '<cmd>:copen<CR>', { desc = 'Open quickfix list' })
+
+map('n', '<C-Space>', 'K')

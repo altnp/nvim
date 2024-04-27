@@ -17,7 +17,7 @@ return {
       enable_modified_markers = true,
       enable_opened_markers = true,
       enable_cursor_hijack = false,
-      hide_root_node = true,
+      hide_root_node = false,
       popup_border_style = 'rounded',
       sort_case_insensitive = true,
       use_default_mappings = false,

@@ -177,6 +177,7 @@ return {
         },
       },
       extensions = {
+        'notify',
         fzf = {
           fuzzy = true,
           override_generic_sorter = true,

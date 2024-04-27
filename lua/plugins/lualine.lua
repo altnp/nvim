@@ -18,7 +18,7 @@ end
 
 local fmt_filename = function(str, _)
   for _, v in ipairs { 'neo-tree' } do
-    if vim.startswith(str, v) then
+    if str == v then
       return ''
     end
   end
@@ -73,30 +73,41 @@ return {
         lualine_a = {
           'mode',
         },
-        lualine_b = { 'branch', 'diff', 'diagnostics' },
+        lualine_b = {
+          'branch',
+          {
+            'diff',
+            symbols = {
+              added = require('ui.icons').GitSymbols.Added,
+              modified = require('ui.icons').GitSymbols.Modified,
+              removed = require('ui.icons').GitSymbols.Deleted,
+            },
+          },
+        },
         lualine_c = {
+          'diagnostics',
           {
             'filetype',
-            icon_only = false, -- true
+            icon_only = true,
             padding = {
-              right = 1, -- 0
+              right = 0,
               left = 1,
             },
           },
-          -- {
-          --   'filename',
-          --   symbols = {
-          --     modified = '',
-          --     newfile = '',
-          --     unnamed = '',
-          --     readonly = '',
-          --   },
-          --   fmt = fmt_filename,
-          --   padding = {
-          --     right = 0,
-          --     left = 0,
-          --   },
-          -- },
+          {
+            'filename',
+            symbols = {
+              modified = '',
+              newfile = '',
+              unnamed = '',
+              readonly = '',
+            },
+            fmt = fmt_filename,
+            padding = {
+              right = 0,
+              left = 0,
+            },
+          },
         },
         lualine_x = {
           {

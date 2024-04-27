@@ -45,10 +45,13 @@ M.GitSymbols = {
   Added = '+',
   Deleted = '-',
   Modified = '~',
+  -- Added = '',
+  -- Deleted = '',
+  -- Modified = '',
 }
 
 M.DiagnosticsSymbols = {
-  Hint = '󰌶',
+  Hint = '',
   Info = '',
   Warn = '',
   Error = '',
