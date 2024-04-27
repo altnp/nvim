@@ -5,7 +5,11 @@ return {
     'anuvyklack/middleclass',
   },
   config = function()
-    require('windows').setup()
+    require('windows').setup {
+      autowidth = {
+        enable = false,
+      },
+    }
     vim.keymap.set('n', '<M-=>', '<cmd>WindowsEqualize<CR>')
   end,
 }

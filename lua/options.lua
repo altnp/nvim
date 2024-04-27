@@ -34,7 +34,8 @@ opt.relativenumber = true
 opt.number = true
 opt.numberwidth = 2
 opt.foldcolumn = '1'
-opt.fillchars = { eob = ' ', fold = ' ', foldopen = '', foldsep = ' ', foldclose = '' }
+opt.fillchars = { eob = ' ', fold = ' ', foldopen = '', foldsep = ' ', foldclose = '', diff = '╱' }
+
 opt.foldlevel = 99
 vim.fn.sign_define('DiagnosticSignError', { text = require('ui.icons').DiagnosticsSymbols.Error, texthl = 'DiagnosticError' })
 opt.foldlevelstart = 99

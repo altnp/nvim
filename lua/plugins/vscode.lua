@@ -1,6 +1,6 @@
 return {
   'Mofiqul/vscode.nvim',
-  lazy = false,
+  -- lazy = false,
 
   config = function()
     require('vscode').load 'dark'
