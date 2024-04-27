@@ -1,19 +1,21 @@
 return {
   'tummetott/reticle.nvim',
   event = 'User FilePost',
-  opts = {
-    disable_in_insert = false,
-    ignore = {
-      cursorline = {
-        'noice', -- Added noice to defaults
-        'DressingInput',
-        'FTerm',
-        'NvimSeparator',
-        'neo-tree-popup',
-        'Nvimtree',
-        'TelescopePrompt',
-        'Trouble',
+  config = function()
+    require('reticle').setup {
+      disable_in_insert = false,
+      ignore = {
+        cursorline = {
+          'noice', -- Added noice to defaults
+          'DressingInput',
+          'FTerm',
+          'NvimSeparator',
+          'neo-tree-popup',
+          'Nvimtree',
+          'TelescopePrompt',
+          'Trouble',
+        },
       },
-    },
-  },
+    }
+  end,
 }

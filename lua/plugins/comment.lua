@@ -8,7 +8,7 @@ return {
     { 'gb', mode = { 'n', 'o' }, desc = 'Comment toggle blockwise' },
     { 'gb', mode = 'x', desc = 'Comment toggle blockwise (visual)' },
     { '<leader>/', mode = 'n', desc = 'Comment toggle' },
-    { '/', mode = 'x', desc = 'Comment toggle' },
+    { '<leader>/', mode = 'x', desc = 'Comment toggle' },
   },
   config = function(_, opts)
     require('Comment').setup(opts)

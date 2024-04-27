@@ -4,9 +4,9 @@ return {
   keys = {
     { '<leader>ff', mode = 'n', desc = 'Telescope find files' },
     { '<leader>fa', mode = 'n', desc = 'Telescope find all files' },
-    { '<leader>fw', mode = 'n', desc = 'Telescope grep files' },
-    { '<leader>fz', mode = 'n', desc = 'Telescope search current buffer' },
-    { '<leader>fb', mode = 'n', desc = 'Telescope find buffers' },
+    { '<leader>fg', mode = 'n', desc = 'Telescope grep files' },
+    { '<leader>f/', mode = 'n', desc = 'Telescope search current buffer' },
+    { '<leader>b', mode = 'n', desc = 'Telescope find buffers' },
     { '??', mode = 'n', desc = 'Telescop find help pages' },
   },
   dependencies = {
@@ -168,6 +168,7 @@ return {
           layout_config = {
             width = { 0.87, max = 120 },
           },
+          initial_mode = 'normal',
           mappings = {
             n = {
               ['<leader>d'] = require('telescope.actions').delete_buffer,
@@ -195,15 +196,15 @@ return {
     require('telescope').load_extension 'luasnip'
 
     local builtin = require 'telescope.builtin'
-    vim.keymap.set('n', '<leader>fw', function()
+    vim.keymap.set('n', '<leader>fg', function()
       builtin.live_grep()
     end, { desc = 'Telescope Live grep' })
 
-    vim.keymap.set('n', '<leader>fb', function()
+    vim.keymap.set('n', '<leader>b', function()
       builtin.buffers()
     end, { desc = 'Telescope Find buffers' })
 
-    vim.keymap.set('n', '<leader>fz', function()
+    vim.keymap.set('n', '<leader>f/', function()
       builtin.current_buffer_fuzzy_find()
     end, { desc = 'Telescope Find in current buffer' })
 

@@ -1,23 +1,10 @@
--- return {
---   'sindrets/diffview.nvim',
---   event = 'VeryLazy',
---   dependencies = {
---     'nvim-tree/nvim-web-devicons',
---   },
---   config = function()
---     require('diffview').setup()
---   end,
--- }
 return {
-  'kdheepak/lazygit.nvim',
-  cmd = {
-    'LazyGit',
-    'LazyGitConfig',
-    'LazyGitCurrentFile',
-    'LazyGitFilter',
-    'LazyGitFilterCurrentFile',
-  },
+  'sindrets/diffview.nvim',
+  event = 'VeryLazy',
   dependencies = {
-    'nvim-lua/plenary.nvim',
+    'nvim-tree/nvim-web-devicons',
   },
+  config = function()
+    require('diffview').setup()
+  end,
 }

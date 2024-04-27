@@ -48,7 +48,7 @@ M.GitSymbols = {
 }
 
 M.DiagnosticsSymbols = {
-  Hint = '',
+  Hint = '󰌶',
   Info = '',
   Warn = '',
   Error = '',

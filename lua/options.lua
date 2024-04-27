@@ -34,10 +34,14 @@ opt.relativenumber = true
 opt.number = true
 opt.numberwidth = 2
 opt.foldcolumn = '1'
-opt.fillchars = { eob = ' ', fold = ' ', foldopen = '󰅀', foldsep = ' ', foldclose = '' }
+opt.fillchars = { eob = ' ', fold = ' ', foldopen = '', foldsep = ' ', foldclose = '' }
 opt.foldlevel = 99
+vim.fn.sign_define('DiagnosticSignError', { text = require('ui.icons').DiagnosticsSymbols.Error, texthl = 'DiagnosticError' })
 opt.foldlevelstart = 99
 opt.foldenable = true
+vim.fn.sign_define('DiagnosticSignHint', { text = require('ui.icons').DiagnosticsSymbols.Hint, texthl = 'DiagnosticHint' })
+vim.fn.sign_define('DiagnosticSignInfo', { text = require('ui.icons').DiagnosticsSymbols.Info, texthl = 'DiagnosticInfo' })
+vim.fn.sign_define('DiagnosticSignWarn', { text = require('ui.icons').DiagnosticsSymbols.Warn, texthl = 'DiagnosticWarn' })
 
 -- Find and Replace
 opt.ignorecase = true
